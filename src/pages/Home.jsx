@@ -1,26 +1,40 @@
-import React from 'react';
+import { useState } from 'react';
+import Loader from '../components/Loader';
 import Hero from '../components/Hero';
 import ServicesShowcase from '../components/ServicesShowcase';
 import StatsSection from '../components/StatsSection';
 import ProjectGallery from '../components/ProjectGallery';
 import SectorsShowcase from '../components/SectorsShowcase';
-import ThemeDemo from '../components/ThemeDemo';
 import PartnersSection from '../components/PartnersSection';
-import NewsletterSection from '../components/NewsletterSection';
 import CTASection from '../components/CTASection';
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useState(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
   return (
-    <div>
-      <Hero />
-      <ServicesShowcase />
-      <StatsSection />
-      <ProjectGallery />
-      <SectorsShowcase />
-      <ThemeDemo />
-      <PartnersSection />
-      <NewsletterSection />
-      <CTASection />
-    </div>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Hero />
+          <ServicesShowcase />
+          <StatsSection />
+          <ProjectGallery />
+          <SectorsShowcase />
+          <PartnersSection />
+          <CTASection />
+        </>
+      )}
+    </>
   );
 }

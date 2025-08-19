@@ -4,9 +4,9 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaFacebook, FaTwitter 
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-900 dark:bg-gray-950 text-white py-16 mt-16 relative overflow-hidden">
+        <footer className="bg-gray-900 text-white py-16 mt-16 relative overflow-hidden">
             {/* Effet de brillance en arrière-plan */}
-            <div className="absolute inset-0 bg-primary/5 dark:bg-primary/10 opacity-50"></div>
+            <div className="absolute inset-0 bg-primary/5 opacity-50"></div>
             <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
             
             <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -19,12 +19,12 @@ export default function Footer() {
                             </div>
                             <p className="text-sm font-semibold text-primary/90 mb-2">Gamma Kappa Solutions SARL</p>
                         </div>
-                        <p className="leading-relaxed text-gray-300 dark:text-gray-400 text-sm">
+                        <p className="leading-relaxed text-gray-300 text-sm">
                             Votre partenaire de confiance pour les solutions technologiques, 
                             télécommunications, et services diversifiés au Cameroun.
                         </p>
-                        <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-xl border border-primary/20 dark:border-primary/30">
-                            <div className="text-xs text-gray-400 dark:text-gray-500 space-y-1">
+                        <div className="bg-primary/10 p-4 rounded-xl border border-primary/20">
+                            <div className="text-xs text-gray-400 space-y-1">
                                 <p><span className="text-primary font-medium">NIU:</span> M042517737194C</p>
                                 <p><span className="text-primary font-medium">RCCM:</span> CM-DLA-02-2025/B-12/00567</p>
                                 <p><span className="text-primary font-medium">Capital:</span> 900.000 FCFA</p>

@@ -3,7 +3,6 @@ import { FaArrowUp, FaRocket } from 'react-icons/fa';
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Show button and calculate scroll progress
   useEffect(() => {
@@ -11,11 +10,6 @@ export default function BackToTop() {
       // Show button after scrolling down 300px
       const scrollY = window.scrollY;
       setIsVisible(scrollY > 300);
-
-      // Calculate scroll progress (0 to 100)
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = totalHeight > 0 ? (scrollY / totalHeight) * 100 : 0;
-      setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -32,7 +26,7 @@ export default function BackToTop() {
 
           {/* Secondary rocket button for fun */}
           <div
-            className="mt-3 w-12 h-12 bg-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:-translate-y-1 flex items-center justify-center cursor-pointer group/rocket"
+            className="mt-3 w-12 h-12 bg-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center cursor-pointer group/rocket"
             onClick={() => {
               // Smooth scroll to top with a little bounce effect
               const scrollStep = -window.scrollY / (500 / 15);
@@ -47,8 +41,6 @@ export default function BackToTop() {
             title="Fusée vers le haut !"
           >
             <FaRocket className="text-white text-sm group-hover/rocket:animate-bounce transition-all duration-300" />
-            {/* Pulse effect */}
-            <div className="absolute inset-0 rounded-full bg-primary opacity-30 animate-ping group-hover:opacity-0 transition-opacity duration-300"></div>
 
             {/* Mini tooltip for rocket */}
             <div className="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 opacity-0 group-hover/rocket:opacity-100 transition-all duration-300 pointer-events-none">
@@ -59,13 +51,8 @@ export default function BackToTop() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Progress indicator text */}
-          <div className="mt-2 text-center">
-            <span className="text-xs text-gray-600 bg-white px-2 py-1 rounded-full shadow-sm">
-              {Math.round(scrollProgress)}%
-            </span>
+            {/* Pulse effect */}
+            <div className="absolute inset-0 rounded-full bg-primary opacity-30 animate-ping group-hover:opacity-0 transition-opacity duration-300"></div>
           </div>
         </div>
       )}

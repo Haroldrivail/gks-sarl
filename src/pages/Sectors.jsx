@@ -1,8 +1,19 @@
-import React from 'react';
+import { useState } from 'react';
+import Loader from '../components/Loader';
 import { NavLink } from 'react-router';
 import { FaStore, FaSeedling, FaTruck, FaHotel, FaCogs, FaHandshake, FaArrowRight, FaCheckCircle, FaUsers, FaTrophy, FaGlobe, FaChartLine } from 'react-icons/fa';
 
 export default function Sectors() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useState(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const sectors = [
     {
       icon: FaStore,
@@ -118,247 +129,253 @@ export default function Sectors() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gray-900 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20"></div>
-        <div className="absolute top-10 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-6">
-            <FaGlobe className="mr-2" />
-            Nos Secteurs d'Activité
-          </div>
-          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
-            Expertise Sectorielle
-            <span className="text-primary"> Multi-Domaines</span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Nous accompagnons les entreprises de tous secteurs avec des solutions 
-            sur mesure adaptées aux spécificités de chaque domaine d'activité.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <NavLink 
-              to="/contact"
-              className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
-            >
-              Découvrir nos Solutions
-              <FaArrowRight className="ml-2" />
-            </NavLink>
-            <NavLink 
-              to="/services"
-              className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300"
-            >
-              Voir nos Services
-            </NavLink>
-          </div>
-        </div>
-      </section>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="min-h-screen bg-gray-50">
+          {/* Hero Section */}
+          <section className="relative py-20 bg-gray-900 overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20"></div>
+            <div className="absolute top-10 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
 
-      {/* Sectors Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Nos Domaines d'Intervention
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Une expertise reconnue dans 6 secteurs clés de l'économie camerounaise 
-              avec des solutions innovantes et performantes.
-            </p>
-          </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+              <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-6">
+                <FaGlobe className="mr-2" />
+                Nos Secteurs d'Activité
+              </div>
+              <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
+                Expertise Sectorielle
+                <span className="text-primary"> Multi-Domaines</span>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                Nous accompagnons les entreprises de tous secteurs avec des solutions
+                sur mesure adaptées aux spécificités de chaque domaine d'activité.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <NavLink
+                  to="/contact"
+                  className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
+                >
+                  Découvrir nos Solutions
+                  <FaArrowRight className="ml-2" />
+                </NavLink>
+                <NavLink
+                  to="/services"
+                  className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300"
+                >
+                  Voir nos Services
+                </NavLink>
+              </div>
+            </div>
+          </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sectors.map((sector, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group"
-              >
-                {/* Sector Header */}
-                <div className={`h-2 bg-gradient-to-r ${sector.color}`}></div>
-                
-                <div className="p-8">
-                  {/* Icon */}
-                  <div className={`w-16 h-16 ${sector.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <sector.icon className={`text-2xl ${sector.iconColor}`} />
-                  </div>
-                  
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300">
-                    {sector.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    {sector.description}
-                  </p>
-                  
-                  {/* Activities */}
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-800 mb-3">Nos interventions :</h4>
-                    <ul className="space-y-2">
-                      {sector.activities.map((activity, activityIndex) => (
-                        <li key={activityIndex} className="flex items-center text-sm text-gray-600">
-                          <FaCheckCircle className="text-green-500 mr-3 flex-shrink-0" />
-                          {activity}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-3 mb-6">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-primary">
-                        {sector.stats.projects}
-                      </div>
-                      <div className="text-xs text-gray-500">Projets</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-secondary">
-                        {sector.stats.clients}
-                      </div>
-                      <div className="text-xs text-gray-500">Clients</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-accent">
-                        {sector.stats.satisfaction}
-                      </div>
-                      <div className="text-xs text-gray-500">Satisfaction</div>
-                    </div>
-                  </div>
-                  
-                  {/* CTA */}
-                  <NavLink 
-                    to="/contact"
-                    className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary hover:text-white text-gray-700 font-medium rounded-xl transition-all duration-300 group-hover:shadow-md"
+          {/* Sectors Grid */}
+          <section className="py-20">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  Nos Domaines d'Intervention
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Une expertise reconnue dans 6 secteurs clés de l'économie camerounaise
+                  avec des solutions innovantes et performantes.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {sectors.map((sector, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group"
                   >
-                    Découvrir nos Solutions
-                    <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                  </NavLink>
-                </div>
+                    {/* Sector Header */}
+                    <div className={`h-2 bg-gradient-to-r ${sector.color}`}></div>
+
+                    <div className="p-8">
+                      {/* Icon */}
+                      <div className={`w-16 h-16 ${sector.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                        <sector.icon className={`text-2xl ${sector.iconColor}`} />
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300">
+                        {sector.title}
+                      </h3>
+                      <p className="text-gray-600 mb-6">
+                        {sector.description}
+                      </p>
+
+                      {/* Activities */}
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-800 mb-3">Nos interventions :</h4>
+                        <ul className="space-y-2">
+                          {sector.activities.map((activity, activityIndex) => (
+                            <li key={activityIndex} className="flex items-center text-sm text-gray-600">
+                              <FaCheckCircle className="text-green-500 mr-3 flex-shrink-0" />
+                              {activity}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Stats */}
+                      <div className="grid grid-cols-3 gap-3 mb-6">
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-primary">
+                            {sector.stats.projects}
+                          </div>
+                          <div className="text-xs text-gray-500">Projets</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-secondary">
+                            {sector.stats.clients}
+                          </div>
+                          <div className="text-xs text-gray-500">Clients</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-accent">
+                            {sector.stats.satisfaction}
+                          </div>
+                          <div className="text-xs text-gray-500">Satisfaction</div>
+                        </div>
+                      </div>
+
+                      {/* CTA */}
+                      <NavLink
+                        to="/contact"
+                        className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary hover:text-white text-gray-700 font-medium rounded-xl transition-all duration-300 group-hover:shadow-md"
+                      >
+                        Découvrir nos Solutions
+                        <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                      </NavLink>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
 
-      {/* Achievements Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Nos Réalisations par Secteur
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Des chiffres qui témoignent de notre expertise et de la confiance 
-              que nous accordent nos clients dans tous les secteurs.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map((achievement, index) => (
-              <div 
-                key={index}
-                className="text-center group hover:scale-105 transition-transform duration-300"
-              >
-                <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <achievement.icon className="text-3xl text-primary group-hover:text-white" />
-                </div>
-                
-                <div className="text-4xl font-bold text-gray-900 mb-2">
-                  {achievement.number}
-                </div>
-                
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {achievement.title}
-                </h3>
-                
-                <p className="text-gray-600">
-                  {achievement.description}
+          {/* Achievements Section */}
+          <section className="py-20 bg-white">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  Nos Réalisations par Secteur
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Des chiffres qui témoignent de notre expertise et de la confiance
+                  que nous accordent nos clients dans tous les secteurs.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonials by Sector */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Témoignages par Secteur
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Découvrez ce que nos clients disent de nos interventions 
-              dans leurs secteurs d'activité respectifs.
-            </p>
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {achievements.map((achievement, index) => (
+                  <div
+                    key={index}
+                    className="text-center group hover:scale-105 transition-transform duration-300"
+                  >
+                    <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                      <achievement.icon className="text-3xl text-primary group-hover:text-white" />
+                    </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
-              >
-                <div className="text-center mb-6">
-                  <div className="text-4xl mb-4">
-                    {testimonial.image}
+                    <div className="text-4xl font-bold text-gray-900 mb-2">
+                      {achievement.number}
+                    </div>
+
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {achievement.title}
+                    </h3>
+
+                    <p className="text-gray-600">
+                      {achievement.description}
+                    </p>
                   </div>
-                  <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-primary font-medium text-sm">
-                    {testimonial.sector}
-                  </div>
-                </div>
-                
-                <p className="text-gray-600 mb-6 italic text-center">
-                  "{testimonial.text}"
-                </p>
-                
-                <div className="text-center">
-                  <div className="font-semibold text-gray-900 mb-1">
-                    {testimonial.author}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {testimonial.company}
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10"></div>
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Votre Secteur Mérite une Expertise Dédiée
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Quel que soit votre domaine d'activité, nous avons l'expertise 
-            et les solutions pour faire croître votre entreprise.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <NavLink 
-              to="/contact"
-              className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
-            >
-              Consultation Sectorielle
-              <FaArrowRight className="ml-2" />
-            </NavLink>
-            <NavLink 
-              to="/services"
-              className="inline-flex items-center px-8 py-4 border-2 border-secondary text-secondary font-semibold rounded-xl hover:bg-secondary hover:text-white hover:bg-secondary transition-all duration-300"
-            >
-              Découvrir nos Services
-            </NavLink>
-          </div>
+          {/* Testimonials by Sector */}
+          <section className="py-20 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  Témoignages par Secteur
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Découvrez ce que nos clients disent de nos interventions
+                  dans leurs secteurs d'activité respectifs.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="text-center mb-6">
+                      <div className="text-4xl mb-4">
+                        {testimonial.image}
+                      </div>
+                      <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-primary font-medium text-sm">
+                        {testimonial.sector}
+                      </div>
+                    </div>
+
+                    <p className="text-gray-600 mb-6 italic text-center">
+                      "{testimonial.text}"
+                    </p>
+
+                    <div className="text-center">
+                      <div className="font-semibold text-gray-900 mb-1">
+                        {testimonial.author}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {testimonial.company}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="py-20 bg-gray-900 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10"></div>
+
+            <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+              <h2 className="text-4xl font-bold text-white mb-6">
+                Votre Secteur Mérite une Expertise Dédiée
+              </h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Quel que soit votre domaine d'activité, nous avons l'expertise
+                et les solutions pour faire croître votre entreprise.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <NavLink
+                  to="/contact"
+                  className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
+                >
+                  Consultation Sectorielle
+                  <FaArrowRight className="ml-2" />
+                </NavLink>
+                <NavLink
+                  to="/services"
+                  className="inline-flex items-center px-8 py-4 border-2 border-secondary text-secondary font-semibold rounded-xl hover:bg-secondary hover:text-white hover:bg-secondary transition-all duration-300"
+                >
+                  Découvrir nos Services
+                </NavLink>
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
+      )}
+    </>
   );
 }

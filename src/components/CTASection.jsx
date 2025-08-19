@@ -148,7 +148,7 @@ export default function CTASection() {
                 <div className="mt-16 text-center">
                     <div className="inline-flex items-center px-6 py-3 bg-accent/20 rounded-full border border-accent/30">
                         <span className="text-accent font-medium">
-                            🎯 Plus de 500 entreprises nous font déjà confiance
+                            🎯 Plus de 50 entreprises nous font déjà confiance
                         </span>
                     </div>
                 </div>

@@ -4,18 +4,18 @@ import { NavLink } from 'react-router';
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen bg-white dark:bg-gray-900 overflow-hidden transition-colors duration-300">
+        <section className="relative min-h-screen bg-white overflow-hidden transition-colors duration-300">
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-white dark:via-gray-900 to-secondary/5"></div>
-            <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl"></div>
-            
+            <div className="absolute inset-0 bg-secondary-50"></div>
+            <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+
             <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Contenu Principal */}
                     <div className="space-y-8 animate-fade-in">
                         {/* Badge */}
-                        <div className="inline-flex items-center px-4 py-2 bg-primary/10 dark:bg-primary/20 rounded-full border border-primary/20 dark:border-primary/30">
+                        <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
                             <FaStar className="text-primary mr-2 text-sm" />
                             <span className="text-sm font-medium text-primary">Solutions d'Excellence depuis 2025</span>
                         </div>
@@ -23,7 +23,7 @@ export default function Hero() {
                         {/* Titre Principal */}
                         <div className="space-y-4">
                             <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                                <span className="text-gray-900 dark:text-white">Transformez</span>
+                                <span className="text-gray-900">Transformez</span>
                                 <br />
                                 <span className="text-primary">Votre Business</span>
                                 <br />
@@ -33,7 +33,7 @@ export default function Hero() {
                         </div>
                         
                         {/* Description */}
-                        <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg">
+                        <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
                             Votre partenaire de confiance pour les <strong className="text-primary">solutions technologiques</strong>, 
                             <strong className="text-secondary"> télécommunications</strong> et 
                             <strong className="text-accent"> services diversifiés</strong> au Cameroun.
@@ -43,15 +43,15 @@ export default function Hero() {
                         <div className="grid grid-cols-3 gap-6 py-6">
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-primary">50+</div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">Projets Réalisés</div>
+                                <div className="text-sm text-gray-600">Projets Réalisés</div>
                             </div>
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-secondary">100%</div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">Satisfaction Client</div>
+                                <div className="text-sm text-gray-600">Satisfaction Client</div>
                             </div>
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-accent">24/7</div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">Support Disponible</div>
+                                <div className="text-sm text-gray-600">Support Disponible</div>
                             </div>
                         </div>
                         
@@ -64,7 +64,7 @@ export default function Hero() {
                                 Démarrer un Projet
                                 <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                             </NavLink>
-                            <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary dark:text-primary font-semibold rounded-xl hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 group">
+                            <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 group">
                                 <FaPlay className="mr-2 group-hover:scale-110 transition-transform duration-300" />
                                 Voir nos Réalisations
                             </button>
@@ -72,12 +72,12 @@ export default function Hero() {
                         
                         {/* Logos Partenaires */}
                         <div className="pt-8">
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Ils nous font confiance</p>
+                            <p className="text-sm text-gray-500 mb-4">Ils nous font confiance</p>
                             <div className="flex items-center gap-8 opacity-60">
-                                <div className="w-20 h-8 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                                    <span className="text-xs font-semibold text-gray-600 dark:text-gray-300">ORANGE</span>
+                                <div className="w-20 h-8 bg-gray-200 rounded flex items-center justify-center">
+                                    <span className="text-xs font-semibold text-gray-600">ORANGE</span>
                                 </div>
-                                <div className="w-20 h-8 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
+                                <div className="w-20 h-8 bg-gray-200 rounded flex items-center justify-center">
                                     <span className="text-xs font-semibold text-gray-600">MTN</span>
                                 </div>
                                 <div className="w-20 h-8 bg-gray-200 rounded flex items-center justify-center">

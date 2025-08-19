@@ -43,16 +43,11 @@ export default function BackToTop() {
             <FaRocket className="text-white text-sm group-hover/rocket:animate-bounce transition-all duration-300" />
 
             {/* Mini tooltip for rocket */}
-            <div className="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 opacity-0 group-hover/rocket:opacity-100 transition-all duration-300 pointer-events-none">
+            <div className="absolute right-full mr-2 transform opacity-0 group-hover/rocket:opacity-100 transition-all duration-300 pointer-events-none">
               <div className="bg-secondary text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
                 Back to Top! 🚀
-                <div className="absolute left-full top-1/2 transform -translate-y-1/2">
-                  <div className="w-0 h-0 border-l-3 border-l-secondary border-t-3 border-t-transparent border-b-3 border-b-transparent"></div>
-                </div>
               </div>
             </div>
-            {/* Pulse effect */}
-            <div className="absolute inset-0 rounded-full bg-primary opacity-30 animate-ping group-hover:opacity-0 transition-opacity duration-300"></div>
           </div>
         </div>
       )}

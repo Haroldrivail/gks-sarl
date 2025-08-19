@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Loader from '../components/Loader';
 import Hero from '../components/Hero';
 import ServicesShowcase from '../components/ServicesShowcase';
+import IllustrationShowcase from '../components/IllustrationShowcase';
 import StatsSection from '../components/StatsSection';
 import ProjectGallery from '../components/ProjectGallery';
 import SectorsShowcase from '../components/SectorsShowcase';
@@ -28,6 +29,7 @@ export default function Home() {
         <>
           <Hero />
           <ServicesShowcase />
+          <IllustrationShowcase />
           <StatsSection />
           <ProjectGallery />
           <SectorsShowcase />

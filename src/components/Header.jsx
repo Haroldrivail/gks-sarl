@@ -30,12 +30,11 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`top-0 left-0 right-0 transition-all duration-500 ease-in-out ${scrolled ? 'bg-transparent backdrop-blur-md shadow-2xl fixed mt-8 py-2 mx-auto z-50 rounded-full max-w-6xl' : 'bg-gray-50 backdrop-blur-sm'}`}>
+        <header className={`fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 ${scrolled ? 'backdrop-blur-3xl shadow-2xl mt-8 py-2 px-5 mx-auto rounded-full max-w-5xl bg-white/90' : 'backdrop-blur-sm bg-transparent w-full'}`}>
             {/* Barre de contact moderne - visible seulement quand pas scrollé */}
-            <div className={`bg-secondary py-2 text-sm transition-all duration-500 ease-in-out overflow-hidden relative ${scrolled ? 'hidden' : 'max-h-16 opacity-100'}`}>
+            <div className={`bg-secondary text-sm transition-all duration-500 ease-in-out overflow-hidden relative ${scrolled ? 'hidden' : 'max-h-16 opacity-100'}`}>
                 {/* Effet de brillance animé */}
-                <div className="absolute inset-0 bg-primary text-shadow-white to-transparent transform -skew-x-12 animate-pulse"></div>
-                <div className="max-w-7xl mx-auto px-6 ">
+                <div className="max-w-7xl mx-auto px-6 py-2">
                     <div className="flex justify-evenly gap-10 flex-wrap items-center">
                         <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300">
                             <div className="p-2 bg-white/20 rounded-full backdrop-blur-sm">
@@ -89,15 +88,14 @@ export default function Header() {
                                     <NavLink
                                         to="/"
                                         className={({ isActive }) =>
-                                            `font-medium px-6 py-2 transition-all duration-300 text-gray-700 ${isActive
+                                            `font-medium px-6 py-2 transition-all duration-300 text-secondary ${isActive
                                                 ? 'text-primary border-b-2 border-primary'
-                                                : 'hover:text-primary-300'
+                                                : 'hover:text-primary/30 hover:border-b-1 hover:border-primary/30'
                                             }`
                                         }>
 
                                         <span className="relative">
                                             Accueil
-                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
 
                                     </NavLink>
@@ -106,15 +104,14 @@ export default function Header() {
                                     <NavLink
                                         to="/services"
                                         className={({ isActive }) =>
-                                            `font-medium px-6 py-2 transition-all duration-300 text-gray-700 ${isActive
+                                            `font-medium px-6 py-2 transition-all duration-300 text-secondary ${isActive
                                                 ? 'text-primary border-b-2 border-primary'
-                                                : 'hover:text-primary-300'
+                                                : 'hover:text-primary/30 hover:border-b-1 hover:border-primary/30'
                                             }`
                                         }
                                     >
                                         <span className="relative">
                                             Services
-                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
 
                                     </NavLink>
@@ -123,15 +120,14 @@ export default function Header() {
                                     <NavLink
                                         to="/sectors"
                                         className={({ isActive }) =>
-                                            `font-medium px-6 py-2 transition-all duration-300 text-gray-700 ${isActive
+                                            `font-medium px-6 py-2 transition-all duration-300 text-secondary ${isActive
                                                 ? 'text-primary border-b-2 border-primary'
-                                                : 'hover:text-primary-300'
+                                                : 'hover:text-primary/30 hover:border-b-1 hover:border-primary/30'
                                             }`
                                         }
                                     >
                                         <span className="relative">
                                             Secteurs
-                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
                                     </NavLink>
                                 </li>
@@ -139,15 +135,14 @@ export default function Header() {
                                     <NavLink
                                         to="/contact"
                                         className={({ isActive }) =>
-                                            `font-medium px-6 py-2 transition-all duration-300 text-gray-700 ${isActive
+                                            `font-medium px-6 py-2 transition-all duration-300 text-secondary ${isActive
                                                 ? 'text-primary border-b-2 border-primary'
-                                                : 'hover:text-primary-300'
+                                                : 'hover:text-primary/30 hover:border-b-1 hover:border-primary/30'
                                             }`
                                         }
                                     >
                                         <span className="relative">
                                             Contact
-                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
                                     </NavLink>
                                 </li>
@@ -158,8 +153,9 @@ export default function Header() {
                         <div className="flex items-center gap-4">
                             {/* Menu mobile toggle moderne */}
                             <button
-                                className="block lg:hidden bg-secondary-50 border-0 text-2xl cursor-pointer text-primary p-3 rounded-2xl transition-all duration-300 hover:shadow-lg hover:from-primary/20 hover:to-secondary/20"
+                                className="block lg:hidden bg-white/90 border-0 text-2xl cursor-pointer text-primary p-3 rounded-2xl transition-all duration-300 hover:shadow-lg hover:bg-white backdrop-blur-sm z-50 relative"
                                 onClick={toggleDrawer}
+                                aria-label="Toggle menu"
                             >
                                 <div className="relative">
                                     <FaBars className={`transition-all duration-300 ${open ? 'opacity-0 rotate-180' : 'opacity-100 rotate-0'}`} />
@@ -172,7 +168,7 @@ export default function Header() {
             </div>
 
             {/* Menu mobile moderne */}
-            <div className={`absolute top-full left-0 right-0 bg-secondary-50 backdrop-blur-xl border-t border-gray-300 shadow-2xl transition-all duration-500 ease-in-out ${open ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+            <div className={`fixed top-full left-0 right-0 bg-secondary-50 backdrop-blur-xl border-t border-gray-200 shadow-2xl transition-all duration-500 ease-in-out z-40 ${open ? 'max-h-screen opacity-100 visible' : 'max-h-0 opacity-0 invisible'} overflow-hidden`}>
                 <div className="bg-transparent">
                     <nav>
                         <ul className="list-none space-y-2">
@@ -181,7 +177,7 @@ export default function Header() {
                                     to="/"
                                     onClick={() => setOpen(false)}
                                     className={({ isActive }) =>
-                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-gray-700 ${isActive
+                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-secondary ${isActive
                                             ? 'text-primary bg-secondary-100'
                                             : 'hover:bg-gray-100'
                                         }`
@@ -195,7 +191,7 @@ export default function Header() {
                                     to="/services"
                                     onClick={() => setOpen(false)}
                                     className={({ isActive }) =>
-                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-gray-700 ${isActive
+                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-secondary ${isActive
                                             ? 'text-primary bg-secondary-100'
                                             : 'hover:bg-gray-100'
                                         }`
@@ -209,7 +205,7 @@ export default function Header() {
                                     to="/sectors"
                                     onClick={() => setOpen(false)}
                                     className={({ isActive }) =>
-                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-gray-700 ${isActive
+                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-secondary ${isActive
                                             ? 'text-primary bg-secondary-100'
                                             : 'hover:bg-gray-100'
                                         }`
@@ -223,7 +219,7 @@ export default function Header() {
                                     to="/contact"
                                     onClick={() => setOpen(false)}
                                     className={({ isActive }) =>
-                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-gray-700 ${isActive
+                                        `no-underline font-medium text-lg block py-4 transition-all duration-300 px-6 text-secondary ${isActive
                                             ? 'text-primary bg-secondary-100'
                                             : 'hover:bg-gray-100'
                                         }`

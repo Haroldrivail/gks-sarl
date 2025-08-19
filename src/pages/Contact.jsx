@@ -209,7 +209,7 @@ export default function Contact() {
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
                                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                        Nom complet *
+                                                        Nom complet <span className="text-red-500 font-bold">*</span>
                                                     </label>
                                                     <div className="relative">
                                                         <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -227,7 +227,7 @@ export default function Contact() {
 
                                                 <div>
                                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                        Email *
+                                                        Email <span className="text-red-500 font-bold">*</span>
                                                     </label>
                                                     <div className="relative">
                                                         <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -301,7 +301,7 @@ export default function Contact() {
 
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Message *
+                                                    Message <span className="text-red-500 font-bold">*</span>
                                                 </label>
                                                 <textarea
                                                     name="message"

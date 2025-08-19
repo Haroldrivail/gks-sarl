@@ -1,14 +1,15 @@
 import React from 'react';
-import { FaPhone, FaEnvelope, FaCalendarAlt, FaArrowRight, FaWhatsapp } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaWhatsapp, FaCalendarAlt, FaArrowRight, FaRocket, FaStar } from 'react-icons/fa';
 import { NavLink } from 'react-router';
+import ServiceIllustration from './ServiceIllustration';
 
 export default function CTASection() {
     return (
         <section className="py-20 bg-gray-900 relative overflow-hidden">
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
-            <div className="absolute top-10 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 left-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-green-500/10"></div>
+            <div className="absolute top-10 right-10 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
             
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16">
@@ -26,7 +27,12 @@ export default function CTASection() {
                     {/* Contact Options */}
                     <div className="space-y-8">
                         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                            <h3 className="text-2xl font-bold text-white mb-6">
+                            <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                <ServiceIllustration 
+                                    type="communication" 
+                                    className="w-8 h-8 mr-3"
+                                    fallbackIcon={FaPhone}
+                                />
                                 Parlons de Votre Projet
                             </h3>
                             
@@ -80,9 +86,27 @@ export default function CTASection() {
 
                     {/* CTA Actions */}
                     <div className="space-y-8">
+                        {/* Illustration principale */}
+                        <div className="text-center mb-8">
+                            <ServiceIllustration 
+                                type="business" 
+                                className="w-80 h-64 mx-auto object-contain"
+                                fallbackIcon={FaRocket}
+                            />
+                        </div>
+
                         {/* Primary CTA */}
-                        <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                            <div className="text-center mb-6">
+                        <div className="bg-white rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                            {/* Decorative illustration */}
+                            <div className="absolute top-4 right-4 w-16 h-16 opacity-10">
+                                <ServiceIllustration 
+                                    type="success" 
+                                    className="w-full h-full object-contain"
+                                    fallbackIcon={FaStar}
+                                />
+                            </div>
+                            
+                            <div className="text-center mb-6 relative z-10">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-3">
                                     Consultation Gratuite
                                 </h3>
@@ -121,8 +145,17 @@ export default function CTASection() {
                         </div>
 
                         {/* Secondary CTA */}
-                        <div className="bg-secondary/10 rounded-2xl p-6 border border-secondary/20">
-                            <div className="text-center">
+                        <div className="bg-secondary/10 rounded-2xl p-6 border border-secondary/20 relative overflow-hidden">
+                            {/* Background illustration */}
+                            <div className="absolute top-0 right-0 w-24 h-24 opacity-20">
+                                <ServiceIllustration 
+                                    type="digital" 
+                                    className="w-full h-full object-contain"
+                                    fallbackIcon={FaEnvelope}
+                                />
+                            </div>
+                            
+                            <div className="text-center relative z-10">
                                 <h4 className="text-xl font-bold text-white mb-3">
                                     Suivez nos Actualités
                                 </h4>

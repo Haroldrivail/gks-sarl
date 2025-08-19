@@ -1,7 +1,16 @@
 import { useState } from 'react';
 import Loader from '../components/Loader';
+import ServiceIllustration from '../components/ServiceIllustration';
 import { NavLink } from 'react-router';
 import { FaSolarPanel, FaWifi, FaLaptopCode, FaServer, FaShippingFast, FaHammer, FaArrowRight, FaCheckCircle, FaRegLightbulb, FaCog } from 'react-icons/fa';
+
+// Import des images du dossier assets
+import datacenterTeamImg from '../assets/frohliche-datacenter-experten-arbeiten-zusammen-mit-hilfe-von-deep-learning-algorithmen.jpg';
+import serverTeamImg from '../assets/gruppe-von-technikern-die-ein-brainstorming-durchfuhren-um-die-serverfarm-neu-zu-konfigurieren.jpg';
+import techTeamImg from '../assets/schwarzes-team-von-mitarbeitern-der-produktionsstatte-die-fehler-beheben-und-debuggen.jpg';
+import solarImg from '../assets/arto-suraj-kH21_cU4FYs-unsplash.jpg';
+import digitalImg from '../assets/guilherme-cunha-4zwozQxDbD4-unsplash.jpg';
+import networkImg from '../assets/kharl-anthony-paica-YZQ1Cdd4PEg-unsplash.jpg';
 
 export default function Services() {
 
@@ -23,7 +32,9 @@ export default function Services() {
       features: ["Installation clé en main", "Maintenance préventive", "Monitoring 24/7", "Garantie 25 ans"],
       color: "from-yellow-400 to-orange-500",
       bgColor: "bg-yellow-50",
-      iconColor: "text-yellow-600"
+      iconColor: "text-yellow-600",
+      illustration: "solar",
+      image: solarImg
     },
     {
       icon: FaWifi,
@@ -32,7 +43,9 @@ export default function Services() {
       features: ["Fibre optique", "Réseaux WiFi", "Solutions IoT", "Support technique"],
       color: "from-blue-400 to-cyan-500",
       bgColor: "bg-blue-50",
-      iconColor: "text-blue-600"
+      iconColor: "text-blue-600",
+      illustration: "telecom",
+      image: networkImg
     },
     {
       icon: FaLaptopCode,
@@ -41,7 +54,9 @@ export default function Services() {
       features: ["Sites web modernes", "SEO/SEM", "Réseaux sociaux", "Analytics"],
       color: "from-purple-400 to-pink-500",
       bgColor: "bg-purple-50",
-      iconColor: "text-purple-600"
+      iconColor: "text-purple-600",
+      illustration: "digital",
+      image: digitalImg
     },
     {
       icon: FaServer,
@@ -50,7 +65,9 @@ export default function Services() {
       features: ["Serveurs dédiés", "Cloud hosting", "Sauvegarde automatique", "SSL inclus"],
       color: "from-green-400 to-emerald-500",
       bgColor: "bg-green-50",
-      iconColor: "text-green-600"
+      iconColor: "text-green-600",
+      illustration: "hosting",
+      image: datacenterTeamImg
     },
     {
       icon: FaShippingFast,
@@ -59,7 +76,9 @@ export default function Services() {
       features: ["Sourcing produits", "Logistique", "Douanes", "Négociation"],
       color: "from-red-400 to-rose-500",
       bgColor: "bg-red-50",
-      iconColor: "text-red-600"
+      iconColor: "text-red-600",
+      illustration: "import",
+      image: serverTeamImg
     },
     {
       icon: FaHammer,
@@ -68,7 +87,9 @@ export default function Services() {
       features: ["Automatisation", "Maintenance", "Formation", "Audit technique"],
       color: "from-gray-400 to-slate-500",
       bgColor: "bg-gray-50",
-      iconColor: "text-gray-600"
+      iconColor: "text-gray-600",
+      illustration: "technical",
+      image: techTeamImg
     }
   ];
 
@@ -106,37 +127,64 @@ export default function Services() {
       ) : (
         <>
           <div className="min-h-screen bg-gray-50">
-            {/* Hero Section */}
+            {/* Hero Section avec Illustration */}
             <section className="relative py-20 bg-gray-900 overflow-hidden">
               {/* Background Elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20"></div>
-              <div className="absolute top-10 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-10 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-green-500/10 to-blue-500/20"></div>
+              <div className="absolute top-10 right-10 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-10 left-10 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
 
-              <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-                <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-6">
-                  <FaCog className="mr-2" />
-                  Nos Services
-                </div>
-                <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Solutions Complètes pour
-                  <span className="text-primary"> Votre Réussite</span>
-                </h1>
-                <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                  De l'énergie solaire aux télécommunications, nous offrons des services
-                  intégrés pour accompagner votre transformation digitale et énergétique.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <NavLink
-                    to="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
-                  >
-                    Demander un Devis
-                    <FaArrowRight className="ml-2" />
-                  </NavLink>
-                  <button className="cursor-pointer inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300">
-                    Voir nos Réalisations
-                  </button>
+              <div className="relative z-10 max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                  {/* Contenu texte */}
+                  <div className="text-center lg:text-left">
+                    <div className="inline-flex items-center px-4 py-2 bg-amber-500/10 rounded-full text-amber-400 font-medium mb-6">
+                      <FaCog className="mr-2" />
+                      Nos Services
+                    </div>
+                    <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
+                      Solutions Complètes pour
+                      <span className="text-amber-400"> Votre Réussite</span>
+                    </h1>
+                    <p className="text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 mb-8">
+                      De l'énergie solaire aux télécommunications, nous offrons des services
+                      intégrés pour accompagner votre transformation digitale et énergétique.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                      <NavLink
+                        to="/contact"
+                        className="inline-flex items-center px-8 py-4 bg-amber-500 text-white font-semibold rounded-xl hover:bg-amber-600 transition-all duration-300"
+                      >
+                        Demander un Devis
+                        <FaArrowRight className="ml-2" />
+                      </NavLink>
+                      <button className="cursor-pointer inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300">
+                        Voir nos Réalisations
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Illustration côté droit */}
+                  <div className="relative">
+                    <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                      <ServiceIllustration
+                        type="business"
+                        className="w-full h-80 object-cover rounded-2xl"
+                        fallbackIcon={<div className="w-full h-80 bg-gradient-to-br from-amber-500/20 to-green-500/20 rounded-2xl flex items-center justify-center">
+                          <span className="text-6xl text-white/60">💼</span>
+                        </div>}
+                      />
+
+                      {/* Éléments flottants */}
+                      <div className="absolute -top-4 -right-4 w-20 h-20 bg-amber-500/20 rounded-2xl backdrop-blur-sm border border-amber-500/30 flex items-center justify-center">
+                        <FaSolarPanel className="text-amber-500 text-2xl" />
+                      </div>
+
+                      <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-green-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30 flex items-center justify-center">
+                        <FaWifi className="text-green-500 text-2xl" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -158,19 +206,44 @@ export default function Services() {
                   {services.map((service, index) => (
                     <div
                       key={index}
-                      className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group"
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2"
                     >
                       {/* Service Header */}
                       <div className={`h-2 bg-gradient-to-r ${service.color}`}></div>
 
-                      <div className="p-8">
-                        {/* Icon */}
-                        <div className={`w-16 h-16 ${service.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                          <service.icon className={`text-2xl ${service.iconColor}`} />
+                      {/* Image principale du service */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+
+                        {/* Overlay avec gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-colors duration-300"></div>
+
+                        {/* Icône flottante */}
+                        <div
+                          className={`absolute top-4 right-4 w-12 h-12 ${service.bgColor} rounded-xl flex items-center justify-center shadow-lg border border-white/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
+                        >
+                          <service.icon className={`text-lg ${service.iconColor}`} />
                         </div>
 
+                        {/* Illustration décorative en overlay */}
+                        <div className="absolute bottom-4 left-4 w-16 h-16 opacity-80">
+                          <ServiceIllustration
+                            type={service.illustration}
+                            className="w-full h-full object-contain"
+                            fallbackIcon={<div className={`w-full h-full ${service.bgColor} rounded-lg flex items-center justify-center`}>
+                              <service.icon className={`text-xl ${service.iconColor}`} />
+                            </div>}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="p-8">
                         {/* Content */}
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-amber-600 transition-colors duration-300">
                           {service.title}
                         </h3>
                         <p className="text-gray-600 mb-6">
@@ -190,7 +263,7 @@ export default function Services() {
                         {/* CTA */}
                         <NavLink
                           to="/contact"
-                          className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary hover:text-white text-gray-700 font-medium rounded-xl transition-all duration-300 group-hover:shadow-md"
+                          className="w-full inline-flex items-center justify-center px-6 py-3 bg-amber-500 hover:text-white text-gray-700 font-medium rounded-xl transition-all duration-300 group-hover:shadow-md"
                         >
                           En Savoir Plus
                           <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -216,24 +289,24 @@ export default function Services() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {processSteps.map((step, index) => (
-                    <div key={index} className="text-center group">
+                    <div 
+                      key={index} 
+                      className="text-center group hover:scale-105 transition-all duration-300"
+                    >
                       <div className="relative">
                         {/* Step Number */}
-                        <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                          <span className="text-2xl font-bold text-primary group-hover:text-white">
+                        <div 
+                          className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-amber-500 group-hover:scale-110 transition-all duration-300"
+                        >
+                          <span className="text-2xl font-bold text-amber-600 group-hover:text-white">
                             {step.step}
                           </span>
                         </div>
-
-                        {/* Connector Line */}
-                        {index < processSteps.length - 1 && (
-                          <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
-                        )}
                       </div>
 
                       {/* Icon */}
-                      <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/10 transition-colors duration-300">
-                        <step.icon className="text-gray-600 text-lg group-hover:text-primary transition-colors duration-300" />
+                      <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-100 group-hover:rotate-12 transition-all duration-300">
+                        <step.icon className="text-gray-600 text-lg group-hover:text-amber-600 transition-colors duration-300" />
                       </div>
 
                       <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -250,7 +323,7 @@ export default function Services() {
 
             {/* CTA Section */}
             <section className="py-20 bg-gray-900 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-green-500/10"></div>
 
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                 <h2 className="text-4xl font-bold text-white mb-6">
@@ -264,12 +337,12 @@ export default function Services() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <NavLink
                     to="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
+                    className="inline-flex items-center px-8 py-4 bg-amber-500 text-white font-semibold rounded-xl hover:bg-amber-600 transition-all duration-300"
                   >
                     Consultation Gratuite
                     <FaArrowRight className="ml-2" />
                   </NavLink>
-                  <button className="inline-flex items-center px-8 py-4 border-2 border-secondary text-secondary cursor-pointer font-semibold rounded-xl hover:bg-secondary hover:text-white hover:bg-secondary transition-all duration-300">
+                  <button className="inline-flex items-center px-8 py-4 border-2 border-green-500 text-green-500 cursor-pointer font-semibold rounded-xl hover:bg-green-500 hover:text-white transition-all duration-300">
                     Télécharger notre Brochure
                   </button>
                 </div>

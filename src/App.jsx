@@ -1,14 +1,20 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
-import App from "./App";
+import { Routes, Route } from "react-router";
+import Layout from "./layouts/Layout.jsx";
+import Home from "./pages/Home.jsx";
+import Services from "./pages/Services.jsx";
+import Sectors from "./pages/Sectors.jsx";
+import Contact from "./pages/Contact.jsx";
 
-const root = document.getElementById("root");
-
-ReactDOM.createRoot(root).render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-    </Routes>
-  </BrowserRouter>,
-);
+export default function App() {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/sectors" element={<Sectors />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Layout>
+  );
+}

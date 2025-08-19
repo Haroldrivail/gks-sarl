@@ -1,0 +1,286 @@
+/* Configuration CSS personnalisée pour GK Solutions avec Tailwind v4 */
+@import "tailwindcss";
+
+/* Variables CSS personnalisées GK Solutions */
+:root {
+  /* Couleurs primaires (Jaune/Orange du soleil) */
+  --primary: hsl(45, 85%, 60%);
+  --primary-50: hsl(45, 95%, 95%);
+  --primary-100: hsl(45, 95%, 85%);
+  --primary-200: hsl(45, 90%, 75%);
+  --primary-300: hsl(45, 85%, 65%);
+  --primary-400: hsl(45, 85%, 60%);
+  --primary-500: hsl(45, 80%, 50%);
+  --primary-600: hsl(35, 85%, 45%);
+  --primary-700: hsl(35, 90%, 40%);
+  --primary-800: hsl(30, 90%, 35%);
+  --primary-900: hsl(25, 85%, 25%);
+
+  /* Couleurs secondaires (Vert de l'arc) */
+  --secondary: hsl(120, 40%, 55%);
+  --secondary-50: hsl(120, 50%, 95%);
+  --secondary-100: hsl(120, 50%, 87%);
+  --secondary-200: hsl(120, 45%, 77%);
+  --secondary-300: hsl(120, 40%, 65%);
+  --secondary-400: hsl(120, 40%, 55%);
+  --secondary-500: hsl(120, 45%, 45%);
+  --secondary-600: hsl(120, 50%, 35%);
+  --secondary-700: hsl(120, 55%, 25%);
+  --secondary-800: hsl(120, 60%, 20%);
+  --secondary-900: hsl(120, 65%, 15%);
+
+  /* Couleurs d'accent (Brun du texte) */
+  --accent: hsl(25, 40%, 55%);
+  --accent-50: hsl(30, 40%, 95%);
+  --accent-100: hsl(30, 40%, 85%);
+  --accent-200: hsl(28, 40%, 75%);
+  --accent-300: hsl(25, 40%, 65%);
+  --accent-400: hsl(25, 40%, 55%);
+  --accent-500: hsl(20, 45%, 45%);
+  --accent-600: hsl(18, 50%, 35%);
+  --accent-700: hsl(15, 55%, 25%);
+  --accent-800: hsl(12, 60%, 20%);
+  --accent-900: hsl(10, 65%, 15%);
+
+  /* Ombres personnalisées */
+  --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-primary: 0 10px 25px rgba(255, 193, 7, 0.3);
+  --shadow-secondary: 0 10px 25px rgba(76, 175, 80, 0.3);
+}
+
+/* Mode sombre */
+[data-theme="dark"] {
+  --primary: hsl(45, 85%, 60%);
+  --primary-50: hsl(45, 90%, 15%);
+  --primary-100: hsl(45, 85%, 25%);
+  --primary-200: hsl(45, 80%, 35%);
+  --primary-300: hsl(45, 85%, 45%);
+  --primary-400: hsl(45, 85%, 55%);
+  --primary-500: hsl(45, 85%, 60%);
+  --primary-600: hsl(45, 90%, 70%);
+  --primary-700: hsl(45, 95%, 75%);
+  --primary-800: hsl(45, 95%, 85%);
+  --primary-900: hsl(45, 95%, 95%);
+
+  --secondary: hsl(120, 45%, 45%);
+  --secondary-50: hsl(120, 60%, 12%);
+  --secondary-100: hsl(120, 55%, 18%);
+  --secondary-200: hsl(120, 50%, 28%);
+  --secondary-300: hsl(120, 45%, 38%);
+  --secondary-400: hsl(120, 45%, 45%);
+  --secondary-500: hsl(120, 40%, 55%);
+  --secondary-600: hsl(120, 45%, 65%);
+  --secondary-700: hsl(120, 50%, 75%);
+  --secondary-800: hsl(120, 50%, 85%);
+  --secondary-900: hsl(120, 50%, 95%);
+
+  --accent: hsl(20, 45%, 45%);
+  --accent-50: hsl(10, 60%, 12%);
+  --accent-100: hsl(12, 55%, 18%);
+  --accent-200: hsl(15, 50%, 28%);
+  --accent-300: hsl(18, 45%, 38%);
+  --accent-400: hsl(20, 45%, 45%);
+  --accent-500: hsl(25, 40%, 55%);
+  --accent-600: hsl(28, 40%, 65%);
+  --accent-700: hsl(30, 40%, 75%);
+  --accent-800: hsl(30, 40%, 85%);
+  --accent-900: hsl(30, 40%, 95%);
+}
+
+/* Classes utilitaires GK Solutions */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+
+.bg-primary-50 { background-color: var(--primary-50); }
+.bg-primary-100 { background-color: var(--primary-100); }
+.bg-primary-200 { background-color: var(--primary-200); }
+
+.bg-secondary-50 { background-color: var(--secondary-50); }
+.bg-secondary-100 { background-color: var(--secondary-100); }
+.bg-secondary-200 { background-color: var(--secondary-200); }
+
+.border-primary { border-color: var(--primary); }
+.border-secondary { border-color: var(--secondary); }
+.border-accent { border-color: var(--accent); }
+
+/* Gradients GK Solutions */
+.bg-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+}
+
+.bg-gradient-hero {
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 50%, var(--accent-50) 100%);
+}
+
+[data-theme="dark"] .bg-gradient-hero {
+  background: linear-gradient(135deg, rgb(17, 24, 39) 0%, rgb(31, 41, 55) 50%, rgb(17, 24, 39) 100%);
+}
+
+/* Ombres GK Solutions */
+.shadow-light { box-shadow: var(--shadow-light); }
+.shadow-medium { box-shadow: var(--shadow-medium); }
+.shadow-large { box-shadow: var(--shadow-large); }
+.shadow-primary { box-shadow: var(--shadow-primary); }
+.shadow-secondary { box-shadow: var(--shadow-secondary); }
+
+/* Composants boutons GK Solutions */
+.btn-gk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-secondary);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Cards GK Solutions */
+.card-gk {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.card-gk:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+[data-theme="dark"] .card-gk {
+  background: rgb(31, 41, 55);
+  border-color: rgb(75, 85, 99);
+  color: rgb(243, 244, 246);
+}
+
+/* Animations GK Solutions */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-light {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+.animate-bounce {
+  animation: bounce-light 2s infinite;
+}
+
+/* Utilitaires responsive */
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Focus states accessibles */
+.focus-gk:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* États de hover pour les éléments interactifs */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}

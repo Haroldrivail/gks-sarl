@@ -225,13 +225,16 @@ export default function Hero() {
                                 Démarrer un Projet
                                 <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                             </NavLink>
-                            <a
-                                href="#projets"
+                            <button
+                                onClick={() => {
+                                  // Navigation directe avec ancrage - méthode la plus fiable
+                                  window.location.href = '/#projets';
+                                }}
                                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 group no-underline"
                             >
                                 <FaPlay className="mr-2 group-hover:scale-110 transition-transform duration-300" />
                                 Voir nos Réalisations
-                            </a>
+                            </button>
                         </animated.div>
 
                         {/* Logos Partenaires */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { useSpring, animated} from '@react-spring/web';
 import { FaArrowUp, FaRocket } from 'react-icons/fa';
+import { scrollToTop } from '../hooks/useScrollToTop';
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,28 +40,7 @@ export default function BackToTop() {
           {/* Secondary rocket button for fun */}
           <div
             className="mt-3 w-12 h-12 bg-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center cursor-pointer group/rocket"
-            onClick={() => {
-              // Fast and optimized scroll to top
-              const duration = 400; // 400ms pour un défilement rapide mais fluide
-              const start = window.pageYOffset;
-              const startTime = performance.now();
-
-              const animateScroll = (currentTime) => {
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                
-                // Ease out cubic pour un mouvement naturel
-                const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-                
-                window.scrollTo(0, start * (1 - easeOutCubic));
-                
-                if (progress < 1) {
-                  requestAnimationFrame(animateScroll);
-                }
-              };
-              
-              requestAnimationFrame(animateScroll);
-            }}
+            onClick={() => scrollToTop(true)}
             title="Fusée vers le haut !"
           >
             <FaRocket className="text-white text-sm group-hover/rocket:animate-bounce transition-all duration-300" />

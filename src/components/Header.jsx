@@ -30,7 +30,7 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 bg-transparent ${scrolled ? 'backdrop-blur-3xl shadow-2xl mt-8 py-2 px-5 mx-auto rounded-full max-w-5xl' : 'backdrop-blur-sm w-full'}`}>
+        <header className={`fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 bg-white/30 ${scrolled ? 'backdrop-blur-3xl shadow-2xl mt-8 py-2 px-5 mx-auto rounded-full max-w-5xl' : 'backdrop-blur-sm w-full'}`}>
             {/* Barre de contact moderne - visible seulement quand pas scrollé */}
             <div className={`bg-secondary text-sm transition-all duration-500 ease-in-out overflow-hidden relative ${scrolled ? 'hidden opacity-0' : 'max-h-16 opacity-100'}`}>
                 {/* Effet de brillance animé */}
@@ -85,7 +85,7 @@ export default function Header() {
                                     <div className={`flex items-center ${scrolled ? 'justify-start' : 'justify-center'}`}>
                                         <img src={Logo} alt="GKS SARL" width={60} />
                                     </div>
-                                    <span className={`text-xs font-semibold text-secondary bg-clip-text bg-secondary tracking-wider block transition-all duration-500 mt-1 ${scrolled ? 'hidden' : 'max-h-6'}`}>
+                                    <span className={`text-xs font-semibold text-secondary bg-clip-text tracking-wider block transition-all duration-500 mt-1 ${scrolled ? 'hidden' : 'max-h-6'}`}>
                                         Gamma Kappa Solutions
                                     </span>
                                 </div>

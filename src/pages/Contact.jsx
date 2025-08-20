@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import Particles from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 import Loader from '../components/Loader';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaBuilding, FaWhatsapp, FaLinkedin, FaTwitter, FaFacebook, FaArrowRight, FaCheckCircle, FaUser, FaCommentAlt, FaChevronDown, FaChevronUp, FaQuestionCircle } from 'react-icons/fa';
 
@@ -8,6 +10,14 @@ import consultationBgImg from '../assets/images/consultation-meeting.jpg';
 export default function Contact() {
 
     const [isLoading, setIsLoading] = useState(true);
+
+    const particlesInit = useCallback(async engine => {
+        await loadSlim(engine);
+    }, []);
+
+    const particlesLoaded = useCallback(async () => {
+        // Particles loaded callback
+    }, []);
     useState(() => {
         const timer = setTimeout(() => {
             setIsLoading(false);
@@ -40,8 +50,53 @@ export default function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Logic for form submission
-        console.log('Form submitted:', formData);
+        
+        // Récupération des données du formulaire
+        const form = e.target;
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+        const company = formData.get('company');
+        const service = formData.get('service');
+        const message = formData.get('message');
+        
+        // Préparation de l'email automatique
+        const subject = "📞 Nouvelle Demande de Contact - GKS SARL";
+        const body = `
+📋 NOUVELLE DEMANDE DE CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 INFORMATIONS CLIENT:
+• Nom: ${name || 'Non renseigné'}
+• Email: ${email || 'Non renseigné'}
+• Téléphone: ${phone || 'Non renseigné'}
+• Entreprise: ${company || 'Non renseigné'}
+
+🎯 DEMANDE:
+• Service demandé: ${service || 'Non spécifié'}
+• Message: 
+${message || 'Aucun message'}
+
+📅 DÉTAILS:
+• Date de demande: ${new Date().toLocaleDateString('fr-FR')}
+• Heure: ${new Date().toLocaleTimeString('fr-FR')}
+• Source: Formulaire de contact - Site web GKS SARL
+
+📋 ACTIONS À EFFECTUER:
+□ Rappeler le client sous 24h
+□ Préparer le devis personnalisé
+□ Planifier la consultation
+□ Envoyer email de confirmation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Cet email a été généré automatiquement depuis le site web.
+        `;
+
+        // Ouverture du client email avec les données pré-remplies
+        window.location.href = `mailto:guykouo@yahoo.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        console.log('Form submitted:', { name, email, phone, company, service, message });
     };
 
     const contactInfo = [
@@ -118,6 +173,85 @@ export default function Contact() {
                     <div className="min-h-screen bg-gray-50">
                         {/* Hero Section */}
                         <section className="relative py-20 bg-gray-900 overflow-hidden">
+                            {/* Particles Background */}
+                            <Particles
+                                id="contact-particles"
+                                init={particlesInit}
+                                loaded={particlesLoaded}
+                                options={{
+                                    background: {
+                                        color: {
+                                            value: "transparent",
+                                        },
+                                    },
+                                    fpsLimit: 60,
+                                    interactivity: {
+                                        events: {
+                                            onHover: {
+                                                enable: true,
+                                                mode: "grab",
+                                            },
+                                            resize: true,
+                                        },
+                                        modes: {
+                                            grab: {
+                                                distance: 140,
+                                                links: {
+                                                    opacity: 0.5,
+                                                },
+                                            },
+                                        },
+                                    },
+                                    particles: {
+                                        color: {
+                                            value: ["#ffffff", "#3B82F6", "#10B981"],
+                                        },
+                                        links: {
+                                            color: "#ffffff",
+                                            distance: 150,
+                                            enable: true,
+                                            opacity: 0.15,
+                                            width: 1,
+                                        },
+                                        move: {
+                                            direction: "none",
+                                            enable: true,
+                                            outModes: {
+                                                default: "out",
+                                            },
+                                            random: true,
+                                            speed: 0.5,
+                                            straight: false,
+                                        },
+                                        number: {
+                                            density: {
+                                                enable: true,
+                                                area: 1000,
+                                            },
+                                            value: 30,
+                                        },
+                                        opacity: {
+                                            value: 0.4,
+                                        },
+                                        shape: {
+                                            type: "circle",
+                                        },
+                                        size: {
+                                            value: { min: 1, max: 2 },
+                                        },
+                                    },
+                                    detectRetina: true,
+                                }}
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: '100%',
+                                    height: '100%',
+                                    zIndex: 1,
+                                }}
+                            />
+
                             {/* Background Image with Overlay */}
                             <div className="absolute inset-0">
                                 <img
@@ -195,7 +329,7 @@ export default function Contact() {
                                                         {info.details.map((detail, detailIndex) => (
                                                             <p key={detailIndex} className="text-gray-600">
                                                                 {detail.isClickable ? (
-                                                                    <a 
+                                                                    <a
                                                                         href={detail.link}
                                                                         className="text-primary hover:text-primary-600 transition-colors duration-300 hover:underline"
                                                                         target={detail.link?.startsWith('http') ? '_blank' : undefined}
@@ -383,22 +517,28 @@ export default function Contact() {
                                     </p>
                                 </div>
 
-                                <div className="bg-gray-200 rounded-2xl h-96 flex items-center justify-center">
-                                    <div className="text-center">
-                                        <FaMapMarkerAlt className="text-6xl text-primary mb-4 mx-auto" />
-                                        <h3 className="text-2xl font-bold text-gray-700 mb-2">
-                                            Carte Interactive
-                                        </h3>
-                                        <p className="text-gray-600">
-                                            <a 
-                                                href="https://maps.google.com/?q=Douala,Quartier Bonapriso,Cameroun" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="hover:text-primary transition-colors duration-300 no-underline"
-                                            >
-                                                Douala, Quartier Bonapriso, Cameroun
-                                            </a>
+                                <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-200 bg-white">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.9520329625157!2d9.695408709755451!3d4.030208247089914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x106112c1b464b6dd%3A0x71458d96aa717b56!2sCimeti%C3%A8re%20De%20Njo%20Njo!5e0!3m2!1sfr!2scm!4v1755697012189!5m2!1sfr!2scm" width="100%" height="450" style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-96 rounded-2xl" title="Localisation GKS SARL - Douala, Cameroun"></iframe>
+
+                                    {/* Overlay avec informations de contact */}
+                                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs">
+                                        <div className="flex items-center mb-2">
+                                            <FaMapMarkerAlt className="text-primary mr-2" />
+                                            <h4 className="font-semibold text-gray-900">GKS SARL</h4>
+                                        </div>
+                                        <p className="text-sm text-gray-600 mb-2">
+                                            Douala, Quartier Bonapriso<br />
+                                            Cameroun
                                         </p>
+                                        <div className="flex items-center text-sm text-primary">
+                                            <FaPhone className="mr-1" />
+                                            <a
+                                                href="tel:+237677117831"
+                                                className="hover:text-primary-600 transition-colors duration-300"
+                                            >
+                                                (+237) 677 11 78 31
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

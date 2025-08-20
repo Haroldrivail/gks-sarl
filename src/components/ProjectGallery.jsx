@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
 import { FaExpand, FaExternalLinkAlt, FaPlay, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 
 // Images pour les projets
@@ -13,6 +15,15 @@ import portIotImg from '../assets/images/port-surveillance.jpeg';
 
 export default function ProjectGallery() {
     const [activeCategory, setActiveCategory] = useState('all');
+    const [showConfetti, setShowConfetti] = useState(false);
+    const { width, height } = useWindowSize();
+
+    const handleCategoryChange = (categoryId) => {
+        setActiveCategory(categoryId);
+        // Trigger confetti when changing categories
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 2000);
+    };
 
     const categories = [
         { id: 'all', name: 'Tous les Projets', count: 12 },
@@ -145,7 +156,7 @@ export default function ProjectGallery() {
                     {categories.map((category) => (
                         <button
                             key={category.id}
-                            onClick={() => setActiveCategory(category.id)}
+                            onClick={() => handleCategoryChange(category.id)}
                             className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                                 activeCategory === category.id
                                     ? 'bg-primary text-white shadow-lg scale-105'
@@ -189,14 +200,7 @@ export default function ProjectGallery() {
 
                                 {/* Hover Overlay */}
                                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <div className="flex space-x-3">
-                                        <button className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-300">
-                                            <FaExpand className="text-sm" />
-                                        </button>
-                                        <button className="w-10 h-10 bg-primary/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-primary transition-colors duration-300">
-                                            <FaExternalLinkAlt className="text-sm" />
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -275,6 +279,24 @@ export default function ProjectGallery() {
                     </div>
                 </div>
             </div>
+            
+            {/* Confetti Effect */}
+            {showConfetti && (
+                <Confetti
+                    width={width}
+                    height={height}
+                    numberOfPieces={150}
+                    colors={['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4']}
+                    gravity={0.1}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        zIndex: 9999,
+                        pointerEvents: 'none'
+                    }}
+                />
+            )}
         </section>
     );
 }

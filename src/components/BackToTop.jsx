@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { useSpring, animated} from '@react-spring/web';
 import { FaArrowUp, FaRocket } from 'react-icons/fa';
 
 export default function BackToTop() {
@@ -18,10 +20,20 @@ export default function BackToTop() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Animation spring pour l'apparition/disparition
+  const buttonAnimation = useSpring({
+    transform: isVisible ? 'translateY(0px) scale(1)' : 'translateY(20px) scale(0.8)',
+    opacity: isVisible ? 1 : 0,
+    config: { tension: 300, friction: 20 }
+  });
+
   return (
     <>
       {isVisible && (
-        <div className="fixed right-6 bottom-6 z-50 group">
+        <animated.div 
+          style={buttonAnimation}
+          className="fixed right-6 bottom-6 z-50 group"
+        >
           {/* Main button container */}
 
           {/* Secondary rocket button for fun */}
@@ -60,7 +72,7 @@ export default function BackToTop() {
               </div>
             </div>
           </div>
-        </div>
+        </animated.div>
       )}
     </>
   );

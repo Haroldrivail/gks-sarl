@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
 import ServiceIllustration from './ServiceIllustration';
 
 // Import des images du dossier assets
@@ -13,6 +15,8 @@ import datacenterImg from '../assets/images/data-center-team.jpg';
 
 const IllustrationShowcase = () => {
   const [currentIllustration, setCurrentIllustration] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const { width, height } = useWindowSize();
 
   const showcaseItems = [
     {
@@ -54,15 +58,36 @@ const IllustrationShowcase = () => {
   ];
 
   useEffect(() => {
+    // Fonction pour changer d'illustration avec confettis
+    const changeIllustration = (index) => {
+      setCurrentIllustration(index);
+      setShowConfetti(true);
+      // Arrêter les confettis après 2 secondes
+      setTimeout(() => setShowConfetti(false), 2000);
+    };
+
     const interval = setInterval(() => {
-      setCurrentIllustration((prev) => (prev + 1) % showcaseItems.length);
+      changeIllustration((currentIllustration + 1) % showcaseItems.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [showcaseItems.length]);
+  }, [currentIllustration, showcaseItems.length]);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
+      {/* Confettis */}
+      {showConfetti && (
+        <Confetti
+          width={width}
+          height={height}
+          recycle={false}
+          numberOfPieces={100}
+          gravity={0.1}
+          colors={['#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6']}
+          style={{ position: 'fixed', top: 0, left: 0, zIndex: 1000 }}
+        />
+      )}
+
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
@@ -148,7 +173,11 @@ const IllustrationShowcase = () => {
               {showcaseItems.map((item, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIllustration(index)}
+                  onClick={() => {
+                    setCurrentIllustration(index);
+                    setShowConfetti(true);
+                    setTimeout(() => setShowConfetti(false), 2000);
+                  }}
                   className={`relative group p-4 rounded-2xl border-2 transition-all duration-300 ${
                     index === currentIllustration
                       ? 'border-primary bg-primary-50'
@@ -161,7 +190,6 @@ const IllustrationShowcase = () => {
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                       onError={(e) => {
-                        // Fallback vers ServiceIllustration en cas d'erreur
                         e.target.style.display = 'none';
                         e.target.nextElementSibling.style.display = 'block';
                       }}
@@ -193,7 +221,11 @@ const IllustrationShowcase = () => {
               {showcaseItems.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIllustration(index)}
+                  onClick={() => {
+                    setCurrentIllustration(index);
+                    setShowConfetti(true);
+                    setTimeout(() => setShowConfetti(false), 2000);
+                  }}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentIllustration
                       ? 'bg-primary scale-125'

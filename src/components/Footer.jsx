@@ -1,10 +1,76 @@
-import { Link } from 'react-router';
+import { useCallback } from 'react';
+import { NavLink } from 'react-router';
+import Particles from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 import Logo from '../assets/logo.jpg'; // Assuming you have a logo image
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaFacebook, FaTwitter } from 'react-icons/fa';
 
 export default function Footer() {
+    const particlesInit = useCallback(async engine => {
+        await loadSlim(engine);
+    }, []);
+
+    const particlesLoaded = useCallback(async () => {
+        // Particles loaded callback
+    }, []);
+
     return (
         <footer className="bg-gray-900 text-white py-16 mt-16 relative overflow-hidden">
+            {/* Particles Background */}
+            <Particles
+                id="footer-particles"
+                init={particlesInit}
+                loaded={particlesLoaded}
+                options={{
+                    background: {
+                        color: {
+                            value: "transparent",
+                        },
+                    },
+                    fpsLimit: 60,
+                    particles: {
+                        color: {
+                            value: ["#3B82F6", "#10B981"],
+                        },
+                        move: {
+                            direction: "top",
+                            enable: true,
+                            outModes: {
+                                default: "out",
+                            },
+                            random: true,
+                            speed: 0.3,
+                            straight: false,
+                        },
+                        number: {
+                            density: {
+                                enable: true,
+                                area: 1200,
+                            },
+                            value: 15,
+                        },
+                        opacity: {
+                            value: 0.2,
+                        },
+                        shape: {
+                            type: "circle",
+                        },
+                        size: {
+                            value: { min: 1, max: 2 },
+                        },
+                    },
+                    detectRetina: true,
+                }}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 1,
+                }}
+            />
+
             {/* Effet de brillance en arrière-plan */}
             <div className="absolute inset-0 bg-primary/5 opacity-50"></div>
             <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
@@ -166,7 +232,7 @@ export default function Footer() {
                         <div className="flex gap-4 mt-8">
                             <a 
                                 href="#" 
-                                aria-label="LinkedIn"
+                                aria-label="NavLinkedIn"
                                 className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-xl no-underline transition-all duration-300 hover:bg-secondary hover:scale-110 hover:rotate-3 hover:shadow-lg group"
                             >
                                 <FaLinkedin className="group-hover:scale-110 transition-transform duration-300" />
@@ -195,48 +261,67 @@ export default function Footer() {
                         <nav>
                             <ul className="flex justify-center gap-8 list-none flex-wrap">
                                 <li>
-                                    <Link 
+                                    <NavLink 
                                         to="/" 
-                                        className="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group"
+                                        className={({ isActive }) =>
+                                            `text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group ${isActive
+                                                ? 'text-primary bg-secondary-100'
+                                                : 'hover:bg-gray-100'
+                                            }`
+                                        }
                                     >
                                         <span className="relative">
                                             Accueil
                                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link 
+                                    <NavLink 
                                         to="/services" 
-                                        className="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group"
-                                    >
+                                        className={({ isActive }) =>
+                                        `text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group ${isActive
+                                            ? 'text-primary bg-secondary-100'
+                                            : 'hover:bg-gray-100'
+                                        }`
+                                    }>
                                         <span className="relative">
                                             Services
                                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link 
+                                    <NavLink 
                                         to="/sectors" 
-                                        className="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group"
+                                        className={({ isActive }) =>
+                                            `text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group ${isActive
+                                                ? 'text-primary bg-secondary-100'
+                                                : 'hover:bg-gray-100'
+                                            }`
+                                        }
                                     >
                                         <span className="relative">
                                             Secteurs
                                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link 
+                                    <NavLink 
                                         to="/contact" 
-                                        className="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group"
+                                        className={({ isActive }) =>
+                                            `text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:scale-105 font-medium px-4 py-2 rounded-lg hover:bg-primary/10 group ${isActive
+                                                ? 'text-primary bg-secondary-100'
+                                                : 'hover:bg-gray-100'
+                                            }`
+                                        }
                                     >
                                         <span className="relative">
                                             Contact
                                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                                         </span>
-                                    </Link>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </nav>

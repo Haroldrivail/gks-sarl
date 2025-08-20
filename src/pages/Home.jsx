@@ -8,6 +8,7 @@ import ProjectGallery from '../components/ProjectGallery';
 import SectorsShowcase from '../components/SectorsShowcase';
 import PartnersSection from '../components/PartnersSection';
 import CTASection from '../components/CTASection';
+import NewsletterSection from '../components/NewsletterSection';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +35,7 @@ export default function Home() {
           <ProjectGallery />
           <SectorsShowcase />
           <PartnersSection />
+          <NewsletterSection />
           <CTASection />
         </>
       )}

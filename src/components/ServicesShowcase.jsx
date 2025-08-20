@@ -1,4 +1,6 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import { useSpring, animated, useInView } from '@react-spring/web';
 import { FaSolarPanel, FaWifi, FaLaptopCode, FaServer, FaShippingFast, FaHammer, FaArrowRight } from 'react-icons/fa';
 import { NavLink } from 'react-router';
 
@@ -11,6 +13,82 @@ import importExportImg from '../assets/images/export-import.jpeg';
 import btpImg from '../assets/images/btp-image.jpg';
 
 export default function ServicesShowcase() {
+    // Composant pour animer chaque carte de service
+    const AnimatedServiceCard = ({ service, index }) => {
+        const [ref, inView] = useInView({
+            threshold: 0.2,
+            triggerOnce: true
+        });
+
+        const cardAnimation = useSpring({
+            from: { 
+                opacity: 0, 
+                transform: 'translateY(60px) scale(0.9)',
+                rotateY: -10
+            },
+            to: { 
+                opacity: inView ? 1 : 0, 
+                transform: inView ? 'translateY(0px) scale(1)' : 'translateY(60px) scale(0.9)',
+                rotateY: inView ? 0 : -10
+            },
+            config: { tension: 200, friction: 25 },
+            delay: index * 150
+        });
+
+        const iconAnimation = useSpring({
+            from: { scale: 0, rotate: -180 },
+            to: { 
+                scale: inView ? 1 : 0, 
+                rotate: inView ? 0 : -180 
+            },
+            config: { tension: 300, friction: 15 },
+            delay: index * 150 + 200
+        });
+
+        return (
+            <animated.div 
+                ref={ref}
+                style={cardAnimation}
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+            >
+                {/* Icon et Image */}
+                <div className="flex items-center justify-between mb-6">
+                    <animated.div 
+                        style={iconAnimation}
+                        className={`w-16 h-16 bg-${service.color}/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                    >
+                        <service.icon className={`text-2xl text-${service.color}`} />
+                    </animated.div>
+                    <div className="w-16 h-16 rounded-xl overflow-hidden shadow-md">
+                        <img 
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                    </div>
+                </div>
+
+                {/* Contenu */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
+                    {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                    {service.description}
+                </p>
+
+                {/* Features */}
+                <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-sm text-gray-600">
+                            <div className={`w-1.5 h-1.5 bg-${service.color} rounded-full mr-3`}></div>
+                            {feature}
+                        </li>
+                    ))}
+                </ul>
+            </animated.div>
+        );
+    };
+
     const services = [
         {
             icon: FaSolarPanel,
@@ -83,42 +161,7 @@ export default function ServicesShowcase() {
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                     {services.map((service, index) => (
-                        <div 
-                            key={index}
-                            className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
-                        >
-                            {/* Icon et Image */}
-                            <div className="flex items-center justify-between mb-6">
-                                <div className={`w-16 h-16 bg-${service.color}/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                                    <service.icon className={`text-2xl text-${service.color}`} />
-                                </div>
-                                <div className="w-16 h-16 rounded-xl overflow-hidden shadow-md">
-                                    <img 
-                                        src={service.image}
-                                        alt={service.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Contenu */}
-                            <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
-                                {service.title}
-                            </h3>
-                            <p className="text-gray-600 mb-6 leading-relaxed">
-                                {service.description}
-                            </p>
-
-                            {/* Features */}
-                            <ul className="space-y-2 mb-6">
-                                {service.features.map((feature, idx) => (
-                                    <li key={idx} className="flex items-center text-sm text-gray-600">
-                                        <div className={`w-1.5 h-1.5 bg-${service.color} rounded-full mr-3`}></div>
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        <AnimatedServiceCard key={index} service={service} index={index} />
                     ))}
                 </div>
 

@@ -1,10 +1,84 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import { useSpring, animated, useInView } from '@react-spring/web';
 import { FaUsers, FaProjectDiagram, FaAward, FaClock, FaGlobe, FaHandshake } from 'react-icons/fa';
 
 // Images pour illustrer les statistiques
 import teamBgImg from '../assets/images/team-collaboration.jpg';
 
 export default function StatsSection() {
+    // Composant pour animer les compteurs
+    const AnimatedCounter = ({ number }) => {
+        const [ref, inView] = useInView({
+            threshold: 0.3,
+            triggerOnce: true
+        });
+
+        // Extraire la valeur numérique et le suffixe
+        const extractNumber = (str) => {
+            const match = str.match(/(\d+\.?\d*)/);
+            return match ? parseFloat(match[1]) : 0;
+        };
+
+        const extractSuffix = (str) => {
+            return str.replace(/\d+\.?\d*/, '');
+        };
+
+        const numericValue = extractNumber(number);
+        const suffix = extractSuffix(number);
+
+        const { value } = useSpring({
+            from: { value: 0 },
+            to: { value: inView ? numericValue : 0 },
+            config: { tension: 100, friction: 40, duration: 2000 },
+        });
+
+        return (
+            <animated.div ref={ref} className="text-4xl lg:text-5xl font-bold mb-2">
+                {value.to(val => `${Math.floor(val)}${suffix}`)}
+            </animated.div>
+        );
+    };
+
+    // Composant pour animer chaque carte de statistique
+    const AnimatedStatCard = ({ stat, index }) => {
+        const [ref, inView] = useInView({
+            threshold: 0.2,
+            triggerOnce: true
+        });
+
+        const cardAnimation = useSpring({
+            from: { opacity: 0, transform: 'translateY(50px)' },
+            to: { 
+                opacity: inView ? 1 : 0, 
+                transform: inView ? 'translateY(0px)' : 'translateY(50px)' 
+            },
+            config: { tension: 200, friction: 25 },
+            delay: index * 200
+        });
+
+        return (
+            <animated.div 
+                ref={ref}
+                style={cardAnimation}
+                className="group bg-gray-50 rounded-2xl p-8 text-center hover:bg-white hover:shadow-xl transition-all duration-500 border border-gray-100"
+            >
+                <div className={`w-20 h-20 bg-${stat.color}/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <stat.icon className={`text-3xl text-${stat.color}`} />
+                </div>
+                <div className={`text-${stat.color}`}>
+                    <AnimatedCounter number={stat.number} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {stat.label}
+                </h3>
+                <p className="text-gray-600">
+                    {stat.description}
+                </p>
+            </animated.div>
+        );
+    };
+
     const stats = [
         {
             icon: FaUsers,
@@ -93,23 +167,7 @@ export default function StatsSection() {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
                     {stats.map((stat, index) => (
-                        <div 
-                            key={index}
-                            className="group bg-gray-50 rounded-2xl p-8 text-center hover:bg-white hover:shadow-xl transition-all duration-500 border border-gray-100"
-                        >
-                            <div className={`w-20 h-20 bg-${stat.color}/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                                <stat.icon className={`text-3xl text-${stat.color}`} />
-                            </div>
-                            <div className={`text-4xl lg:text-5xl font-bold text-${stat.color} mb-2`}>
-                                {stat.number}
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">
-                                {stat.label}
-                            </h3>
-                            <p className="text-gray-600">
-                                {stat.description}
-                            </p>
-                        </div>
+                        <AnimatedStatCard key={index} stat={stat} index={index} />
                     ))}
                 </div>
 

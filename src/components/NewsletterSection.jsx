@@ -1,10 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
 import { FaRocket, FaLightbulb, FaChartLine, FaUsers, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
 
 // Image d'arrière-plan pour la newsletter
 import newsletterBgImg from '../assets/images/network-infrastructure.jpg';
 
 export default function NewsletterSection() {
+    const [email, setEmail] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
+    const { width, height } = useWindowSize();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        // Récupération des données du formulaire
+        const formData = new FormData(e.target);
+        const firstName = formData.get('firstName');
+        const email = formData.get('email');
+        const sector = formData.get('sector');
+        
+        if (email && email.trim()) {
+            // Préparation de l'email automatique
+            const subject = "🔔 Nouvel Abonnement Newsletter - GKS SARL";
+            const body = `
+📧 NOUVEL ABONNEMENT NEWSLETTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 INFORMATIONS ABONNÉ:
+• Prénom: ${firstName || 'Non renseigné'}
+• Email: ${email}
+• Secteur d'activité: ${sector || 'Non renseigné'}
+
+📅 DÉTAILS:
+• Date d'abonnement: ${new Date().toLocaleDateString('fr-FR')}
+• Heure: ${new Date().toLocaleTimeString('fr-FR')}
+• Source: Site web GKS SARL
+
+📋 ACTIONS À EFFECTUER:
+□ Ajouter l'email à la liste de diffusion
+□ Envoyer email de bienvenue
+□ Configurer la newsletter bi-mensuelle
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Cet email a été généré automatiquement depuis le site web.
+            `;
+
+            // Ouverture du client email avec les données pré-remplies
+            window.location.href = `mailto:guykouo@yahoo.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Affichage des confetti et du message de confirmation
+            setIsSubmitted(true);
+            setShowConfetti(true);
+            
+            // Arrêter les confettis après 3 secondes
+            setTimeout(() => {
+                setShowConfetti(false);
+                // Reset after 5 seconds pour permettre une nouvelle soumission
+                setTimeout(() => {
+                    setIsSubmitted(false);
+                    setEmail('');
+                }, 2000);
+            }, 3000);
+        }
+    };
+
     const benefits = [
         {
             icon: FaLightbulb,
@@ -37,15 +98,28 @@ export default function NewsletterSection() {
 
     return (
         <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+            {/* Confettis */}
+            {showConfetti && (
+                <Confetti
+                    width={width}
+                    height={height}
+                    recycle={false}
+                    numberOfPieces={200}
+                    gravity={0.1}
+                    colors={['#f59e0b', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6', '#f97316']}
+                    style={{ position: 'fixed', top: 0, left: 0, zIndex: 1000 }}
+                />
+            )}
+
             {/* Background Image with Overlay */}
             <div className="absolute inset-0">
-                <img 
+                <img
                     src={newsletterBgImg}
                     alt="Infrastructure réseau et connectivité"
                     className="w-full h-full object-cover opacity-5"
                 />
             </div>
-            
+
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
@@ -63,7 +137,7 @@ export default function NewsletterSection() {
                         <span className="text-primary"> l'Innovation</span>
                     </h2>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Recevez directement dans votre boîte mail nos dernières actualités, 
+                        Recevez directement dans votre boîte mail nos dernières actualités,
                         conseils d'experts et études de cas exclusives. 100% gratuit, 0% spam.
                     </p>
                 </div>
@@ -75,10 +149,10 @@ export default function NewsletterSection() {
                             <h3 className="text-2xl font-bold text-gray-900 mb-8">
                                 Ce que vous recevrez :
                             </h3>
-                            
+
                             <div className="space-y-6">
                                 {benefits.map((benefit, index) => (
-                                    <div 
+                                    <div
                                         key={index}
                                         className="flex items-start group hover:scale-105 transition-all duration-300"
                                     >
@@ -130,26 +204,32 @@ export default function NewsletterSection() {
                                 </p>
                             </div>
 
-                            <form className="space-y-6">
+                            <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Prénom *
+                                        Prénom <span className="text-red-500">*</span>
                                     </label>
-                                    <input 
+                                    <input
                                         type="text"
+                                        name="firstName"
                                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
                                         placeholder="Votre prénom"
+                                        required
                                     />
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Email *
+                                        Email <span className="text-red-500">*</span>
                                     </label>
-                                    <input 
+                                    <input
                                         type="email"
+                                        name="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
                                         placeholder="votre.email@exemple.com"
+                                        required
                                     />
                                 </div>
 
@@ -157,7 +237,10 @@ export default function NewsletterSection() {
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
                                         Secteur d'activité
                                     </label>
-                                    <select className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300">
+                                    <select 
+                                        name="sector"
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                                    >
                                         <option value="">Sélectionnez votre secteur</option>
                                         <option value="agriculture">Agriculture</option>
                                         <option value="sante">Santé</option>
@@ -169,23 +252,36 @@ export default function NewsletterSection() {
                                 </div>
 
                                 <div className="flex items-start">
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         id="consent"
                                         className="mt-1 mr-3 text-primary focus:ring-primary"
                                     />
                                     <label htmlFor="consent" className="text-sm text-gray-600">
-                                        J'accepte de recevoir les newsletters de GKS SARL et 
+                                        J'accepte de recevoir les newsletters de GKS SARL et
                                         confirme avoir pris connaissance de la politique de confidentialité.
                                     </label>
                                 </div>
 
-                                <button 
+                                <button
                                     type="submit"
-                                    className="w-full bg-primary text-white font-semibold py-4 rounded-xl hover:bg-primary-600 cursor-pointer transition-all duration-300 flex items-center justify-center group"
+                                    className={`w-full font-semibold py-4 rounded-xl cursor-pointer transition-all duration-300 flex items-center justify-center group ${isSubmitted
+                                        ? 'bg-green-500 text-white'
+                                        : 'bg-primary text-white hover:bg-primary-600'
+                                        }`}
+                                    disabled={isSubmitted}
                                 >
-                                    S'abonner Maintenant
-                                    <FaCheckCircle className="ml-2 group-hover:rotate-12 transition-transform duration-300" />
+                                    {isSubmitted ? (
+                                        <>
+                                            Email envoyé ! Vérifiez votre client mail 📧
+                                            <FaCheckCircle className="ml-2 text-white" />
+                                        </>
+                                    ) : (
+                                        <>
+                                            S'abonner Maintenant
+                                            <FaCheckCircle className="ml-2 group-hover:rotate-12 transition-transform duration-300" />
+                                        </>
+                                    )}
                                 </button>
                             </form>
 
@@ -215,7 +311,7 @@ export default function NewsletterSection() {
                 <div className="mt-16 text-center">
                     <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 max-w-2xl mx-auto">
                         <p className="text-gray-600 italic mb-4">
-                            "Grâce à la newsletter de GKS SARL, j'ai pu optimiser mes installations 
+                            "Grâce à la newsletter de GKS SARL, j'ai pu optimiser mes installations
                             solaires et augmenter ma rentabilité de 30%. Leurs conseils sont précieux!"
                         </p>
                         <div className="flex items-center justify-center">
@@ -230,6 +326,6 @@ export default function NewsletterSection() {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

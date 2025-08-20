@@ -30,30 +30,41 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 ${scrolled ? 'backdrop-blur-3xl shadow-2xl mt-8 py-2 px-5 mx-auto rounded-full max-w-5xl bg-white/90' : 'backdrop-blur-sm bg-transparent w-full'}`}>
+        <header className={`fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 bg-transparent ${scrolled ? 'backdrop-blur-3xl shadow-2xl mt-8 py-2 px-5 mx-auto rounded-full max-w-5xl' : 'backdrop-blur-sm w-full'}`}>
             {/* Barre de contact moderne - visible seulement quand pas scrollé */}
-            <div className={`bg-secondary text-sm transition-all duration-500 ease-in-out overflow-hidden relative ${scrolled ? 'hidden' : 'max-h-16 opacity-100'}`}>
+            <div className={`bg-secondary text-sm transition-all duration-500 ease-in-out overflow-hidden relative ${scrolled ? 'hidden opacity-0' : 'max-h-16 opacity-100'}`}>
                 {/* Effet de brillance animé */}
                 <div className="max-w-7xl mx-auto px-6 py-2">
                     <div className="flex justify-evenly gap-10 flex-wrap items-center">
-                        <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300">
+                        <a 
+                            href="tel:+237677117831"
+                            className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300 no-underline"
+                        >
                             <div className="p-2 bg-white/20 rounded-full backdrop-blur-sm">
                                 <FaPhone className="text-sm text-white" />
                             </div>
                             <span className="font-medium text-white">(+237) 677 11 78 31</span>
-                        </div>
-                        <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300">
+                        </a>
+                        <a 
+                            href="mailto:guykouo@yahoo.fr"
+                            className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300 no-underline"
+                        >
                             <div className="p-2 bg-white/20 rounded-full backdrop-blur-sm">
                                 <FaEnvelope className="text-sm text-white" />
                             </div>
                             <span className="font-medium text-white">guykouo@yahoo.fr</span>
-                        </div>
-                        <div className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300">
+                        </a>
+                        <a 
+                            href="https://maps.google.com/?q=Douala,Cameroun" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300 no-underline"
+                        >
                             <div className="p-2 bg-white/20 rounded-full backdrop-blur-sm">
                                 <FaMapMarkerAlt className="text-sm text-white" />
                             </div>
                             <span className="font-medium text-white">Douala, Cameroun</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -74,7 +85,7 @@ export default function Header() {
                                     <div className={`flex items-center ${scrolled ? 'justify-start' : 'justify-center'}`}>
                                         <img src={Logo} alt="GKS SARL" width={60} />
                                     </div>
-                                    <span className={`text-xs font-semibold text-gray-800 bg-clip-text bg-secondary tracking-wider block transition-all duration-500 mt-1 ${scrolled ? 'hidden' : 'max-h-6'}`}>
+                                    <span className={`text-xs font-semibold text-secondary bg-clip-text bg-secondary tracking-wider block transition-all duration-500 mt-1 ${scrolled ? 'hidden' : 'max-h-6'}`}>
                                         Gamma Kappa Solutions
                                     </span>
                                 </div>

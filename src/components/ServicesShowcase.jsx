@@ -2,6 +2,14 @@ import React from 'react';
 import { FaSolarPanel, FaWifi, FaLaptopCode, FaServer, FaShippingFast, FaHammer, FaArrowRight } from 'react-icons/fa';
 import { NavLink } from 'react-router';
 
+// Images pour les services
+import solarImg from '../assets/images/solar-image.jpg';
+import telecommunicationsImg from '../assets/images/network-1.jpeg';
+import marketingImg from '../assets/images/marketing-image.jpeg';
+import hostingImg from '../assets/images/cloud-hosting.jpg';
+import importExportImg from '../assets/images/export-import.jpeg';
+import btpImg from '../assets/images/btp-image.jpg';
+
 export default function ServicesShowcase() {
     const services = [
         {
@@ -10,7 +18,7 @@ export default function ServicesShowcase() {
             description: "Solutions d'énergie renouvelable pour réduire vos coûts et votre empreinte carbone.",
             features: ["Installation complète", "Maintenance 24/7", "Garantie 25 ans"],
             color: "primary",
-            image: "🌞"
+            image: solarImg
         },
         {
             icon: FaWifi,
@@ -18,7 +26,7 @@ export default function ServicesShowcase() {
             description: "Infrastructure réseau moderne pour connecter votre entreprise au monde.",
             features: ["Fibre optique", "WiFi professionnel", "Support technique"],
             color: "secondary",
-            image: "📡"
+            image: telecommunicationsImg
         },
         {
             icon: FaLaptopCode,
@@ -26,7 +34,7 @@ export default function ServicesShowcase() {
             description: "Stratégies digitales pour booster votre présence en ligne et vos ventes.",
             features: ["SEO/SEA", "Réseaux sociaux", "Analytics"],
             color: "accent",
-            image: "📱"
+            image: marketingImg
         },
         {
             icon: FaServer,
@@ -34,7 +42,7 @@ export default function ServicesShowcase() {
             description: "Hébergement haute performance et sécurisé pour vos sites web.",
             features: ["99.9% uptime", "SSL gratuit", "Backup quotidien"],
             color: "primary",
-            image: "☁️"
+            image: hostingImg
         },
         {
             icon: FaShippingFast,
@@ -42,7 +50,7 @@ export default function ServicesShowcase() {
             description: "Services logistiques complets pour vos échanges commerciaux internationaux.",
             features: ["Douanes", "Transport", "Assurance"],
             color: "secondary",
-            image: "🚢"
+            image: importExportImg
         },
         {
             icon: FaHammer,
@@ -50,7 +58,7 @@ export default function ServicesShowcase() {
             description: "Construction et solutions industrielles adaptées à vos besoins spécifiques.",
             features: ["Génie civil", "Équipements", "Supervision"],
             color: "accent",
-            image: "🏗️"
+            image: btpImg
         }
     ];
 
@@ -84,7 +92,13 @@ export default function ServicesShowcase() {
                                 <div className={`w-16 h-16 bg-${service.color}/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                                     <service.icon className={`text-2xl text-${service.color}`} />
                                 </div>
-                                <div className="text-4xl">{service.image}</div>
+                                <div className="w-16 h-16 rounded-xl overflow-hidden shadow-md">
+                                    <img 
+                                        src={service.image}
+                                        alt={service.title}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                    />
+                                </div>
                             </div>
 
                             {/* Contenu */}
@@ -104,12 +118,6 @@ export default function ServicesShowcase() {
                                     </li>
                                 ))}
                             </ul>
-
-                            {/* CTA */}
-                            <button className={`w-full flex items-center justify-center px-6 py-3 border-2 border-${service.color} text-${service.color} rounded-xl hover:bg-${service.color} hover:text-white transition-all duration-300 group font-medium cursor-pointer`}>
-                                En savoir plus
-                                <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                            </button>
                         </div>
                     ))}
                 </div>

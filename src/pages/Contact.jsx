@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Loader from '../components/Loader';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaBuilding, FaWhatsapp, FaLinkedin, FaTwitter, FaFacebook, FaArrowRight, FaCheckCircle, FaUser, FaCommentAlt, FaChevronDown, FaChevronUp, FaQuestionCircle } from 'react-icons/fa';
 
+// Import des images d'arrière-plan
+import consultationBgImg from '../assets/images/consultation-meeting.jpg';
+
 export default function Contact() {
 
     const [isLoading, setIsLoading] = useState(true);
@@ -45,31 +48,46 @@ export default function Contact() {
         {
             icon: FaBuilding,
             title: "Entreprise",
-            details: ["GAMMA KAPPA SOLUTIONS SARL", "Sigle : GKS SARL"],
+            details: [
+                { text: "GAMMA KAPPA SOLUTIONS SARL", link: null, isClickable: false },
+                { text: "Sigle : GKS SARL", link: null, isClickable: false }
+            ],
             color: "text-primary"
         },
         {
             icon: FaMapMarkerAlt,
             title: "Adresse",
-            details: ["Douala, Cameroun", "Quartier Bonapriso"],
+            details: [
+                { text: "Douala, Cameroun", link: "https://maps.google.com/?q=Douala,Cameroun", isClickable: true },
+                { text: "Quartier Bonapriso", link: null, isClickable: false }
+            ],
             color: "text-secondary"
         },
         {
             icon: FaPhone,
             title: "Téléphone",
-            details: ["(+237) 677 11 78 31", "Appels & WhatsApp"],
+            details: [
+                { text: "(+237) 677 11 78 31", link: "tel:+237677117831", isClickable: true },
+                { text: "Appels & WhatsApp", link: null, isClickable: false }
+            ],
             color: "text-accent"
         },
         {
             icon: FaEnvelope,
             title: "Email",
-            details: ["guykouo@yahoo.fr", "Contact professionnel"],
+            details: [
+                { text: "guykouo@yahoo.fr", link: "mailto:guykouo@yahoo.fr", isClickable: true },
+                { text: "Contact professionnel", link: null, isClickable: false }
+            ],
             color: "text-primary"
         },
         {
             icon: FaClock,
             title: "Horaires",
-            details: ["Lun - Ven: 8h00 - 18h00", "Sam: 9h00 - 13h00"],
+            details: [
+                { text: "Lun - Ven: 8h00 - 18h00", link: null, isClickable: false },
+                { text: "Sam: 9h00 - 13h00", link: null, isClickable: false }
+            ],
             color: "text-secondary"
         }
     ];
@@ -100,6 +118,16 @@ export default function Contact() {
                     <div className="min-h-screen bg-gray-50">
                         {/* Hero Section */}
                         <section className="relative py-20 bg-gray-900 overflow-hidden">
+                            {/* Background Image with Overlay */}
+                            <div className="absolute inset-0">
+                                <img
+                                    src={consultationBgImg}
+                                    alt="Consultation professionnelle"
+                                    className="w-full h-full object-cover opacity-20"
+                                />
+                                <div className="absolute inset-0 bg-gray-900/70"></div>
+                            </div>
+
                             {/* Background Elements */}
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20"></div>
                             <div className="absolute top-10 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
@@ -166,7 +194,18 @@ export default function Contact() {
                                                         </h3>
                                                         {info.details.map((detail, detailIndex) => (
                                                             <p key={detailIndex} className="text-gray-600">
-                                                                {detail}
+                                                                {detail.isClickable ? (
+                                                                    <a 
+                                                                        href={detail.link}
+                                                                        className="text-primary hover:text-primary-600 transition-colors duration-300 hover:underline"
+                                                                        target={detail.link?.startsWith('http') ? '_blank' : undefined}
+                                                                        rel={detail.link?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                                                    >
+                                                                        {detail.text}
+                                                                    </a>
+                                                                ) : (
+                                                                    detail.text
+                                                                )}
                                                             </p>
                                                         ))}
                                                     </div>
@@ -351,7 +390,14 @@ export default function Contact() {
                                             Carte Interactive
                                         </h3>
                                         <p className="text-gray-600">
-                                            Douala, Quartier Bonapriso, Cameroun
+                                            <a 
+                                                href="https://maps.google.com/?q=Douala,Quartier Bonapriso,Cameroun" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="hover:text-primary transition-colors duration-300 no-underline"
+                                            >
+                                                Douala, Quartier Bonapriso, Cameroun
+                                            </a>
                                         </p>
                                     </div>
                                 </div>

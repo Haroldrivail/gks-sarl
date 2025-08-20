@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { FaExpand, FaExternalLinkAlt, FaPlay, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 
+// Images pour les projets
+import solarProjectImg from '../assets/images/solar-image.jpg';
+import automationImg from '../assets/images/automation-1.jpg';
+import networkImg from '../assets/images/network-1.jpeg';
+import iotImg from '../assets/images/iot-monitoring.jpg';
+import smartCityImg from '../assets/images/smart-city.jpg';
+import universityImg from '../assets/images/university-campus.jpg';
+import ruralSolarImg from '../assets/images/rural-solar.jpg';
+import portIotImg from '../assets/images/port-surveillance.jpeg';
+
 export default function ProjectGallery() {
     const [activeCategory, setActiveCategory] = useState('all');
 
@@ -17,7 +27,7 @@ export default function ProjectGallery() {
             id: 1,
             title: "Centrale Solaire Agricole",
             category: "solar",
-            image: "🌞",
+            image: solarProjectImg,
             location: "Douala",
             year: "2024",
             description: "Installation de 500kW pour irrigation automatisée",
@@ -28,7 +38,7 @@ export default function ProjectGallery() {
             id: 2,
             title: "Automatisation Industrielle",
             category: "automation",
-            image: "🏭",
+            image: automationImg,
             location: "Yaoundé",
             year: "2024",
             description: "Système complet de gestion production",
@@ -39,7 +49,7 @@ export default function ProjectGallery() {
             id: 3,
             title: "Réseau Hospitalier",
             category: "network",
-            image: "🏥",
+            image: networkImg,
             location: "Bafoussam",
             year: "2023",
             description: "Infrastructure réseau haute disponibilité",
@@ -50,7 +60,7 @@ export default function ProjectGallery() {
             id: 4,
             title: "Ferme Connectée",
             category: "iot",
-            image: "🌱",
+            image: iotImg,
             location: "Bamenda",
             year: "2023",
             description: "Monitoring en temps réel des cultures",
@@ -61,7 +71,7 @@ export default function ProjectGallery() {
             id: 5,
             title: "Éclairage Public Intelligent",
             category: "automation",
-            image: "💡",
+            image: smartCityImg,
             location: "Douala",
             year: "2023",
             description: "Gestion intelligente de l'éclairage urbain",
@@ -72,7 +82,7 @@ export default function ProjectGallery() {
             id: 6,
             title: "Campus Universitaire Connecté",
             category: "network",
-            image: "🎓",
+            image: universityImg,
             location: "Yaoundé",
             year: "2024",
             description: "WiFi haute performance pour 5000 étudiants",
@@ -83,7 +93,7 @@ export default function ProjectGallery() {
             id: 7,
             title: "Microgrid Rural",
             category: "solar",
-            image: "⚡",
+            image: ruralSolarImg,
             location: "Maroua",
             year: "2023",
             description: "Électrification de village isolé",
@@ -94,7 +104,7 @@ export default function ProjectGallery() {
             id: 8,
             title: "Surveillance IoT Port",
             category: "iot",
-            image: "⚓",
+            image: portIotImg,
             location: "Limbé",
             year: "2024",
             description: "Monitoring conteneurs et sécurité",
@@ -108,7 +118,7 @@ export default function ProjectGallery() {
         : projects.filter(project => project.category === activeCategory);
 
     return (
-        <section className="py-20 bg-gray-50 relative overflow-hidden">
+        <section id="projets" className="py-20 bg-gray-50 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
@@ -162,13 +172,13 @@ export default function ProjectGallery() {
                                 animationDelay: `${index * 100}ms`
                             }}
                         >
-                            {/* Project Image/Icon */}
+                            {/* Project Image */}
                             <div className="relative h-48 bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
-                                        {project.image}
-                                    </div>
-                                </div>
+                                <img 
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                />
                                 
                                 {/* Featured Badge */}
                                 {project.featured && (
@@ -222,22 +232,9 @@ export default function ProjectGallery() {
                                         </span>
                                     ))}
                                 </div>
-
-                                {/* CTA */}
-                                <button className="w-full bg-primary hover:text-white text-gray-700 font-medium py-3 rounded-xl transition-all duration-300 group-hover:shadow-md cursor-pointer">
-                                    Voir les Détails
-                                </button>
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Load More Button */}
-                <div className="text-center mt-12">
-                    <button className="cursor-pointer inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 hover:scale-105 transition-all duration-300 shadow-lg">
-                        Voir Plus de Projets
-                        <FaExternalLinkAlt className="ml-2" />
-                    </button>
                 </div>
 
                 {/* Bottom Stats */}

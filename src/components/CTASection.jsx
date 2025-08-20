@@ -3,9 +3,23 @@ import { FaPhone, FaEnvelope, FaWhatsapp, FaCalendarAlt, FaArrowRight, FaRocket,
 import { NavLink } from 'react-router';
 import ServiceIllustration from './ServiceIllustration';
 
+// Images pour le CTA
+import ctaBgImg from '../assets/images/cta-image.jpg';
+import businessImg from '../assets/images/business-growth.jpg';
+
 export default function CTASection() {
     return (
         <section className="py-20 bg-gray-900 relative overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+                <img 
+                    src={ctaBgImg}
+                    alt="Consultation professionnelle"
+                    className="w-full h-full object-cover opacity-10"
+                />
+                <div className="absolute inset-0 bg-gray-900/80"></div>
+            </div>
+            
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-green-500/10"></div>
             <div className="absolute top-10 right-10 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl"></div>
@@ -38,7 +52,10 @@ export default function CTASection() {
                             
                             <div className="space-y-6">
                                 {/* Phone */}
-                                <div className="flex items-center group hover:scale-105 transition-transform duration-300">
+                                <a 
+                                    href="tel:+237677117831"
+                                    className="flex items-center group hover:scale-105 transition-transform duration-300 no-underline"
+                                >
                                     <div className="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mr-4">
                                         <FaPhone className="text-primary text-lg" />
                                     </div>
@@ -46,10 +63,13 @@ export default function CTASection() {
                                         <h4 className="text-white font-semibold">Appelez-nous</h4>
                                         <p className="text-gray-300">(+237) 677 11 78 31</p>
                                     </div>
-                                </div>
+                                </a>
 
                                 {/* Email */}
-                                <div className="flex items-center group hover:scale-105 transition-transform duration-300">
+                                <a 
+                                    href="mailto:guykouo@yahoo.fr"
+                                    className="flex items-center group hover:scale-105 transition-transform duration-300 no-underline"
+                                >
                                     <div className="w-14 h-14 bg-secondary/20 rounded-xl flex items-center justify-center mr-4">
                                         <FaEnvelope className="text-secondary text-lg" />
                                     </div>
@@ -57,10 +77,15 @@ export default function CTASection() {
                                         <h4 className="text-white font-semibold">Écrivez-nous</h4>
                                         <p className="text-gray-300">guykouo@yahoo.fr</p>
                                     </div>
-                                </div>
+                                </a>
 
                                 {/* WhatsApp */}
-                                <div className="flex items-center group hover:scale-105 transition-transform duration-300">
+                                <a 
+                                    href="https://wa.me/237677117831"
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex items-center group hover:scale-105 transition-transform duration-300 no-underline"
+                                >
                                     <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center mr-4">
                                         <FaWhatsapp className="text-accent text-lg" />
                                     </div>
@@ -68,7 +93,7 @@ export default function CTASection() {
                                         <h4 className="text-white font-semibold">WhatsApp</h4>
                                         <p className="text-gray-300">Chat instantané</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
 
@@ -86,13 +111,15 @@ export default function CTASection() {
 
                     {/* CTA Actions */}
                     <div className="space-y-8">
-                        {/* Illustration principale */}
+                        {/* Image principale */}
                         <div className="text-center mb-8">
-                            <ServiceIllustration 
-                                type="business" 
-                                className="w-80 h-64 mx-auto object-contain"
-                                fallbackIcon={FaRocket}
-                            />
+                            <div className="w-80 h-64 mx-auto rounded-2xl overflow-hidden shadow-2xl">
+                                <img 
+                                    src={businessImg}
+                                    alt="Croissance business"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                         </div>
 
                         {/* Primary CTA */}
@@ -123,10 +150,6 @@ export default function CTASection() {
                                     Démarrer Maintenant
                                     <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                                 </NavLink>
-                                
-                                <button className="w-full flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-white transition-all duration-300">
-                                    Télécharger notre Brochure
-                                </button>
                             </div>
 
                             {/* Trust Indicators */}

@@ -1,6 +1,9 @@
 import React from 'react';
 import { FaUsers, FaProjectDiagram, FaAward, FaClock, FaGlobe, FaHandshake } from 'react-icons/fa';
 
+// Images pour illustrer les statistiques
+import teamBgImg from '../assets/images/team-collaboration.jpg';
+
 export default function StatsSection() {
     const stats = [
         {
@@ -112,6 +115,16 @@ export default function StatsSection() {
 
                 {/* Achievements Section */}
                 <div className="bg-gray-900 rounded-3xl p-12 text-white relative overflow-hidden">
+                    {/* Background Image with Overlay */}
+                    <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                        <img 
+                            src={teamBgImg}
+                            alt="Équipe GKS SARL"
+                            className="w-full h-full object-cover opacity-20"
+                        />
+                        <div className="absolute inset-0 bg-gray-900/80"></div>
+                    </div>
+                    
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-2xl"></div>
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-2xl"></div>
                     

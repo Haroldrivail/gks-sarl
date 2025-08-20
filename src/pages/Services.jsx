@@ -5,15 +5,17 @@ import { NavLink } from 'react-router';
 import { FaSolarPanel, FaWifi, FaLaptopCode, FaServer, FaShippingFast, FaHammer, FaArrowRight, FaCheckCircle, FaRegLightbulb, FaCog } from 'react-icons/fa';
 
 // Import des images du dossier assets
-import datacenterTeamImg from '../assets/frohliche-datacenter-experten-arbeiten-zusammen-mit-hilfe-von-deep-learning-algorithmen.jpg';
-import serverTeamImg from '../assets/gruppe-von-technikern-die-ein-brainstorming-durchfuhren-um-die-serverfarm-neu-zu-konfigurieren.jpg';
-import techTeamImg from '../assets/schwarzes-team-von-mitarbeitern-der-produktionsstatte-die-fehler-beheben-und-debuggen.jpg';
-import solarImg from '../assets/arto-suraj-kH21_cU4FYs-unsplash.jpg';
-import digitalImg from '../assets/guilherme-cunha-4zwozQxDbD4-unsplash.jpg';
-import networkImg from '../assets/kharl-anthony-paica-YZQ1Cdd4PEg-unsplash.jpg';
+import datacenterTeamImg from '../assets/images/data-center-team.jpg';
+import serverTeamImg from '../assets/images/export-import.jpeg';
+import techTeamImg from '../assets/images/tech-team.jpg';
+import solarImg from '../assets/images/solar-image.jpg';
+import digitalImg from '../assets/images/digital-image.jpg';
+import networkImg from '../assets/images/networking-image.jpg';
+
+// Image d'arrière-plan pour la section hero
+import servicesBgImg from '../assets/images/business-growth.jpg';
 
 export default function Services() {
-
   const [isLoading, setIsLoading] = useState(true);
 
   useState(() => {
@@ -129,6 +131,16 @@ export default function Services() {
           <div className="min-h-screen bg-gray-50">
             {/* Hero Section avec Illustration */}
             <section className="relative py-20 bg-gray-900 overflow-hidden">
+              {/* Background Image with Overlay */}
+              <div className="absolute inset-0">
+                <img 
+                  src={servicesBgImg}
+                  alt="Solutions business et croissance"
+                  className="w-full h-full object-cover opacity-15"
+                />
+                <div className="absolute inset-0 bg-gray-900/75"></div>
+              </div>
+              
               {/* Background Elements */}
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-green-500/10 to-blue-500/20"></div>
               <div className="absolute top-10 right-10 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
@@ -158,7 +170,13 @@ export default function Services() {
                         Demander un Devis
                         <FaArrowRight className="ml-2" />
                       </NavLink>
-                      <button className="cursor-pointer inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300">
+                      <button
+                        onClick={() => {
+                          // Navigation directe avec ancrage - méthode la plus fiable
+                          window.location.href = '/#projets';
+                        }}
+                        className="cursor-pointer inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300"
+                      >
                         Voir nos Réalisations
                       </button>
                     </div>
@@ -259,15 +277,6 @@ export default function Services() {
                             </li>
                           ))}
                         </ul>
-
-                        {/* CTA */}
-                        <NavLink
-                          to="/contact"
-                          className="w-full inline-flex items-center justify-center px-6 py-3 bg-amber-500 hover:text-white text-gray-700 font-medium rounded-xl transition-all duration-300 group-hover:shadow-md"
-                        >
-                          En Savoir Plus
-                          <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                        </NavLink>
                       </div>
                     </div>
                   ))}
@@ -342,9 +351,6 @@ export default function Services() {
                     Consultation Gratuite
                     <FaArrowRight className="ml-2" />
                   </NavLink>
-                  <button className="inline-flex items-center px-8 py-4 border-2 border-green-500 text-green-500 cursor-pointer font-semibold rounded-xl hover:bg-green-500 hover:text-white transition-all duration-300">
-                    Télécharger notre Brochure
-                  </button>
                 </div>
               </div>
             </section>

@@ -131,24 +131,35 @@ export default function Footer() {
                             <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-accent rounded-full"></div>
                         </h4>
                         <div className="space-y-4">
-                            <div className="flex items-center text-gray-300 group hover:text-white transition-all duration-300 hover:translate-x-1">
+                            <a 
+                                href="https://maps.google.com/?q=Douala,République du Cameroun" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex items-center text-gray-300 group hover:text-white transition-all duration-300 hover:translate-x-1 no-underline"
+                            >
                                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-4 group-hover:bg-primary/40 transition-all duration-300">
                                     <FaMapMarkerAlt className="text-primary group-hover:scale-110 transition-transform duration-300" />
                                 </div>
                                 <span>Douala, République du Cameroun</span>
-                            </div>
-                            <div className="flex items-center text-gray-300 group hover:text-white transition-all duration-300 hover:translate-x-1">
+                            </a>
+                            <a 
+                                href="tel:+237677117831"
+                                className="flex items-center text-gray-300 group hover:text-white transition-all duration-300 hover:translate-x-1 no-underline"
+                            >
                                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-4 group-hover:bg-primary/40 transition-all duration-300">
                                     <FaPhone className="text-primary group-hover:scale-110 transition-transform duration-300" />
                                 </div>
                                 <span>(+237) 677 11 78 31</span>
-                            </div>
-                            <div className="flex items-center text-gray-300 group hover:text-white transition-all duration-300 hover:translate-x-1">
+                            </a>
+                            <a 
+                                href="mailto:guykouo@yahoo.fr"
+                                className="flex items-center text-gray-300 group hover:text-white transition-all duration-300 hover:translate-x-1 no-underline"
+                            >
                                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-4 group-hover:bg-primary/40 transition-all duration-300">
                                     <FaEnvelope className="text-primary group-hover:scale-110 transition-transform duration-300" />
                                 </div>
                                 <span>guykouo@yahoo.fr</span>
-                            </div>
+                            </a>
                         </div>
                         
                         {/* Réseaux sociaux */}

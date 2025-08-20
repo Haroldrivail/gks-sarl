@@ -2,6 +2,9 @@ import React from 'react';
 import { FaStore, FaLeaf, FaTruck, FaHotel, FaCogs, FaHandshake, FaArrowRight } from 'react-icons/fa';
 import { NavLink } from 'react-router';
 
+// Image d'arrière-plan pour la section secteurs
+import sectorsShowcaseBgImg from '../assets/images/smart-city.jpg';
+
 export default function SectorsShowcase() {
     const sectors = [
         {
@@ -55,8 +58,17 @@ export default function SectorsShowcase() {
     ];
 
     return (
-        <section className="py-20 bg-gray-50">
-            <div className="max-w-7xl mx-auto px-6">
+        <section className="py-20 bg-gray-50 relative overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+                <img 
+                    src={sectorsShowcaseBgImg}
+                    alt="Smart city et secteurs technologiques"
+                    className="w-full h-full object-cover opacity-10"
+                />
+            </div>
+            
+            <div className="relative z-10 max-w-7xl mx-auto px-6">
                 {/* Header */}
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center px-4 py-2 bg-accent/10 rounded-full border border-accent/20 mb-6">
@@ -107,12 +119,6 @@ export default function SectorsShowcase() {
                                         </div>
                                     ))}
                                 </div>
-
-                                {/* CTA */}
-                                <button className={`w-full flex items-center justify-center px-4 py-3 bg-${sector.color}/5 text-${sector.color} rounded-xl hover:bg-${sector.color} hover:text-white transition-all duration-300 group font-medium cursor-pointer`}>
-                                    Découvrir
-                                    <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                                </button>
                             </div>
                         </div>
                     ))}

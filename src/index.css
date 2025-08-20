@@ -1,2 +1,20 @@
 @import "tailwindcss";
 @import './theme/theme.css';
+
+/* Configuration pour le défilement fluide */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Configuration optimisée pour un défilement plus rapide */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

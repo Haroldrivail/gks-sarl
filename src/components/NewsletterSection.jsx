@@ -1,6 +1,9 @@
 import React from 'react';
 import { FaRocket, FaLightbulb, FaChartLine, FaUsers, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
 
+// Image d'arrière-plan pour la newsletter
+import newsletterBgImg from '../assets/images/network-infrastructure.jpg';
+
 export default function NewsletterSection() {
     const benefits = [
         {
@@ -34,6 +37,15 @@ export default function NewsletterSection() {
 
     return (
         <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+                <img 
+                    src={newsletterBgImg}
+                    alt="Infrastructure réseau et connectivité"
+                    className="w-full h-full object-cover opacity-5"
+                />
+            </div>
+            
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>

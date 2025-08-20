@@ -3,12 +3,16 @@ import { FaArrowRight, FaPlay, FaCheck, FaStar, FaSolarPanel, FaWifi } from 'rea
 import { NavLink } from 'react-router';
 import ServiceIllustration from './ServiceIllustration';
 
+// Import des images du dossier assets
+import heroTechImg from '../assets/images/hero-tech-img.jpg';
+import teamWorkImg from '../assets/images/team-collaboration.jpg';
+
 export default function Hero() {
     return (
         <section className="relative min-h-screen bg-white overflow-hidden transition-colors duration-300">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-green-100"></div>
-            <div className="absolute top-20 right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 left-10 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
@@ -16,9 +20,9 @@ export default function Hero() {
                     {/* Contenu Principal */}
                     <div className="space-y-8 animate-fade-in">
                         {/* Badge */}
-                        <div className="inline-flex items-center px-4 py-2 bg-amber-500/10 rounded-full border border-amber-500/20">
-                            <FaStar className="text-amber-500 mr-2 text-sm" />
-                            <span className="text-sm font-medium text-amber-500">Solutions d'Excellence depuis 2025</span>
+                        <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
+                            <FaStar className="text-primary mr-2 text-sm" />
+                            <span className="text-sm font-medium text-primary">Solutions d'Excellence depuis 2025</span>
                         </div>
                         
                         {/* Titre Principal */}
@@ -26,16 +30,16 @@ export default function Hero() {
                             <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                                 <span className="text-gray-900">Transformez</span>
                                 <br />
-                                <span className="text-amber-500">Votre Business</span>
+                                <span className="text-primary">Votre Business</span>
                                 <br />
                                 <span className="text-green-500">Avec GKS SARL</span>
                             </h1>
-                            <div className="w-20 h-1 bg-amber-500 rounded-full"></div>
+                            <div className="w-20 h-1 bg-primary rounded-full"></div>
                         </div>
                         
                         {/* Description */}
                         <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                            Votre partenaire de confiance pour les <strong className="text-amber-500">solutions technologiques</strong>, 
+                            Votre partenaire de confiance pour les <strong className="text-primary">solutions technologiques</strong>, 
                             <strong className="text-green-500"> télécommunications</strong> et 
                             <strong className="text-blue-500"> services diversifiés</strong> au Cameroun.
                         </p>
@@ -43,7 +47,7 @@ export default function Hero() {
                         {/* Statistiques */}
                         <div className="grid grid-cols-3 gap-6 py-6">
                             <div className="text-center">
-                                <div className="text-3xl font-bold text-amber-500">50+</div>
+                                <div className="text-3xl font-bold text-primary">50+</div>
                                 <div className="text-sm text-gray-600">Projets Réalisés</div>
                             </div>
                             <div className="text-center">
@@ -60,15 +64,18 @@ export default function Hero() {
                         <div className="flex flex-col sm:flex-row gap-4">
                             <NavLink 
                                 to="/contact"
-                                className="inline-flex items-center justify-center px-8 py-4 bg-amber-500 text-white font-semibold rounded-xl hover:bg-amber-600 hover:scale-105 hover:shadow-xl transition-all duration-300 group"
+                                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-amber-600 hover:scale-105 hover:shadow-xl transition-all duration-300 group"
                             >
                                 Démarrer un Projet
                                 <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                             </NavLink>
-                            <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-amber-500 text-amber-500 font-semibold rounded-xl hover:bg-amber-500 hover:text-white hover:scale-105 transition-all duration-300 group">
+                            <a 
+                                href="#projets"
+                                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 group no-underline"
+                            >
                                 <FaPlay className="mr-2 group-hover:scale-110 transition-transform duration-300" />
                                 Voir nos Réalisations
-                            </button>
+                            </a>
                         </div>
                         
                         {/* Logos Partenaires */}
@@ -92,23 +99,21 @@ export default function Hero() {
                     <div className="relative animate-slide-up">
                         {/* Illustration principale depuis Doodle Ipsum */}
                         <div className="relative">
-                            <div className="absolute inset-0 bg-amber-500/20 rounded-3xl transform rotate-6"></div>
+                            <div className="absolute inset-0 bg-primary/20 rounded-3xl transform rotate-6"></div>
                             <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 overflow-hidden">
-                                {/* Illustration de technologie */}
-                                <div className="w-full h-64 mb-6 rounded-2xl overflow-hidden bg-gradient-to-br from-amber-50 to-green-50">
-                                    <ServiceIllustration 
-                                        type="tech"
-                                        className="w-full h-full object-cover"
-                                        fallbackIcon={<div className="w-full h-full bg-gradient-to-br from-amber-100 to-green-100 flex items-center justify-center">
-                                            <span className="text-2xl text-gray-600">🚀</span>
-                                        </div>}
+                                {/* Image technologie réelle */}
+                                <div className="w-full h-64 mb-6 rounded-2xl overflow-hidden bg-secondary-300">
+                                    <img 
+                                        src={heroTechImg}
+                                        alt="Infrastructure technologique GKS SARL"
+                                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                                     />
                                 </div>
                                 
                                 {/* Simulation d'interface améliorée */}
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <div className="w-32 h-4 bg-amber-500 rounded"></div>
+                                        <div className="w-32 h-4 bg-primary rounded"></div>
                                         <div className="w-4 h-4 bg-green-500 rounded-full"></div>
                                     </div>
                                     <div className="space-y-3">
@@ -117,7 +122,7 @@ export default function Hero() {
                                         <div className="h-3 bg-gray-200 rounded w-5/6"></div>
                                     </div>
                                     <div className="flex gap-2">
-                                        <div className="w-16 h-8 bg-amber-500 rounded text-white text-xs flex items-center justify-center">
+                                        <div className="w-16 h-8 bg-primary rounded text-white text-xs flex items-center justify-center">
                                             Solar
                                         </div>
                                         <div className="w-16 h-8 bg-green-500 rounded text-white text-xs flex items-center justify-center">
@@ -132,12 +137,10 @@ export default function Hero() {
                                 {/* Cards flottantes avec mini illustrations */}
                                 <div className="absolute -top-4 -right-4 w-24 h-24 bg-white rounded-2xl shadow-xl flex items-center justify-center border border-gray-100">
                                     <div className="text-center">
-                                        <ServiceIllustration 
-                                            type="avatar1"
-                                            className="w-8 h-8 mx-auto mb-1"
-                                            fallbackIcon={<div className="w-8 h-8 bg-amber-500/20 rounded-lg mx-auto mb-1 flex items-center justify-center">
-                                                <FaCheck className="text-amber-500 text-sm" />
-                                            </div>}
+                                        <img 
+                                            src={teamWorkImg}
+                                            alt="Équipe certifiée"
+                                            className="w-8 h-8 rounded-lg mx-auto mb-1 object-cover"
                                         />
                                         <div className="text-xs font-semibold text-gray-700">Certifié</div>
                                     </div>
@@ -167,11 +170,11 @@ export default function Hero() {
                                 fallbackIcon={<span className="text-blue-500 text-lg">💡</span>}
                             />
                         </div>
-                        <div className="absolute bottom-1/4 -left-8 w-12 h-12 bg-amber-500/20 rounded-full animate-pulse-gk flex items-center justify-center">
+                        <div className="absolute bottom-1/4 -left-8 w-12 h-12 bg-primary/20 rounded-full animate-pulse-gk flex items-center justify-center">
                             <ServiceIllustration 
                                 type="decorative2"
                                 className="w-6 h-6"
-                                fallbackIcon={<span className="text-amber-500 text-sm">⚡</span>}
+                                fallbackIcon={<span className="text-primary text-sm">⚡</span>}
                             />
                         </div>
                     </div>
@@ -180,8 +183,8 @@ export default function Hero() {
             
             {/* Scroll Indicator */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <div className="w-6 h-10 border-2 border-amber-500/30 rounded-full flex justify-center">
-                    <div className="w-1 h-3 bg-amber-500 rounded-full mt-2 animate-pulse"></div>
+                <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
+                    <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
                 </div>
             </div>
         </section>

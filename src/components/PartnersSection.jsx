@@ -1,6 +1,9 @@
 import React from 'react';
 import { FaStar, FaQuoteLeft, FaTrophy, FaAward } from 'react-icons/fa';
 
+// Image d'arrière-plan pour la section partenaires
+import partnersBgImg from '../assets/images/data-center.jpg';
+
 export default function PartnersSection() {
     const partners = [
         {
@@ -94,6 +97,15 @@ export default function PartnersSection() {
 
     return (
         <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+                <img 
+                    src={partnersBgImg}
+                    alt="Infrastructure technologique"
+                    className="w-full h-full object-cover opacity-5"
+                />
+            </div>
+            
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>

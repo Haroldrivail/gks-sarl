@@ -3,6 +3,9 @@ import Loader from '../components/Loader';
 import { NavLink } from 'react-router';
 import { FaStore, FaSeedling, FaTruck, FaHotel, FaCogs, FaHandshake, FaArrowRight, FaCheckCircle, FaUsers, FaTrophy, FaGlobe, FaChartLine } from 'react-icons/fa';
 
+// Image d'arrière-plan pour la section hero
+import sectorsBgImg from '../assets/images/team-collaboration.jpg';
+
 export default function Sectors() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -136,6 +139,16 @@ export default function Sectors() {
         <div className="min-h-screen bg-gray-50">
           {/* Hero Section */}
           <section className="relative py-20 bg-gray-900 overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+              <img
+                src={sectorsBgImg}
+                alt="Équipe collaborative multisectorielle"
+                className="w-full h-full object-cover opacity-20"
+              />
+              <div className="absolute inset-0 bg-gray-900/70"></div>
+            </div>
+
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20"></div>
             <div className="absolute top-10 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
@@ -155,13 +168,6 @@ export default function Sectors() {
                 sur mesure adaptées aux spécificités de chaque domaine d'activité.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <NavLink
-                  to="/contact"
-                  className="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-600 transition-all duration-300"
-                >
-                  Découvrir nos Solutions
-                  <FaArrowRight className="ml-2" />
-                </NavLink>
                 <NavLink
                   to="/services"
                   className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300"
@@ -242,15 +248,6 @@ export default function Sectors() {
                           <div className="text-xs text-gray-500">Satisfaction</div>
                         </div>
                       </div>
-
-                      {/* CTA */}
-                      <NavLink
-                        to="/contact"
-                        className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary hover:text-white text-gray-700 font-medium rounded-xl transition-all duration-300 group-hover:shadow-md"
-                      >
-                        Découvrir nos Solutions
-                        <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                      </NavLink>
                     </div>
                   </div>
                 ))}

@@ -1,15 +1,19 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import Particles from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import Loader from '../components/Loader';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaBuilding, FaWhatsapp, FaLinkedin, FaTwitter, FaFacebook, FaArrowRight, FaCheckCircle, FaUser, FaCommentAlt, FaChevronDown, FaChevronUp, FaQuestionCircle } from 'react-icons/fa';
+import usePreloadResources from '../hooks/usePreloadResources';
 
 // Import des images d'arrière-plan
 import consultationBgImg from '../assets/images/consultation-meeting.jpg';
 
 export default function Contact() {
-
-    const [isLoading, setIsLoading] = useState(true);
+    const { progress, isComplete } = usePreloadResources();
+    const [fadeOut, setFadeOut] = useState(false);
+    const [hideLoader, setHideLoader] = useState(false);
 
     const particlesInit = useCallback(async engine => {
         await loadSlim(engine);
@@ -18,13 +22,14 @@ export default function Contact() {
     const particlesLoaded = useCallback(async () => {
         // Particles loaded callback
     }, []);
-    useState(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, []);
+    // Transition après fin du chargement
+    useEffect(() => {
+        if (isComplete || progress >= 100) {
+            const t1 = setTimeout(() => setFadeOut(true), 250);
+            const t2 = setTimeout(() => setHideLoader(true), 900);
+            return () => { clearTimeout(t1); clearTimeout(t2); };
+        }
+    }, [isComplete, progress]);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -166,13 +171,21 @@ Cet email a été généré automatiquement depuis le site web.
 
     return (
         <>
-            {isLoading ? (
-                <Loader />
-            ) : (
+            {!hideLoader && (
+                <div className={(fadeOut ? 'opacity-0' : 'opacity-100') + ' transition-opacity duration-500'}>
+                    <Loader progress={progress} />
+                </div>
+            )}
+            {hideLoader && (
                 <>
                     <div className="min-h-screen bg-gray-50">
                         {/* Hero Section */}
-                        <section className="relative py-20 bg-gray-900 overflow-hidden">
+                        <motion.section 
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="relative py-20 bg-gray-900 overflow-hidden"
+                        >
                             {/* Particles Background */}
                             <Particles
                                 id="contact-particles"
@@ -297,14 +310,19 @@ Cet email a été généré automatiquement depuis le site web.
                                     </a>
                                 </div>
                             </div>
-                        </section>
+                        </motion.section>
 
                         {/* Contact Information & Form */}
                         <section className="py-20">
                             <div className="max-w-7xl mx-auto px-6">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                                     {/* Contact Information */}
-                                    <div>
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -50 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6 }}
+                                    >
                                         <h2 className="text-4xl font-bold text-gray-900 mb-8">
                                             Nos Coordonnées
                                         </h2>
@@ -365,10 +383,16 @@ Cet email a été généré automatiquement depuis le site web.
                                                 ))}
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
 
                                     {/* Contact Form */}
-                                    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                                    <motion.div 
+                                        initial={{ opacity: 0, x: 50 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6, delay: 0.2 }}
+                                        className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
+                                    >
                                         <div className="text-center mb-8">
                                             <h3 className="text-3xl font-bold text-gray-900 mb-4">
                                                 Demande de Contact
@@ -500,7 +524,7 @@ Cet email a été généré automatiquement depuis le site web.
                                                 Réponse garantie sous 24h
                                             </div>
                                         </form>
-                                    </div>
+                                    </motion.div>
                                 </div>
                             </div>
                         </section>
@@ -545,9 +569,21 @@ Cet email a été généré automatiquement depuis le site web.
                         </section>
 
                         {/* FAQ Contact */}
-                        <section className="py-20 bg-gray-50">
+                        <motion.section 
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="py-20 bg-gray-50"
+                        >
                             <div className="max-w-4xl mx-auto px-6">
-                                <div className="text-center mb-16">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6 }}
+                                    className="text-center mb-16"
+                                >
                                     <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-4">
                                         <FaQuestionCircle className="mr-2" />
                                         FAQ
@@ -558,7 +594,7 @@ Cet email a été généré automatiquement depuis le site web.
                                     <p className="text-xl text-gray-600">
                                         Trouvez rapidement les réponses aux questions les plus courantes
                                     </p>
-                                </div>
+                                </motion.div>
 
                                 <div className="space-y-4">
                                     {[
@@ -603,8 +639,20 @@ Cet email a été généré automatiquement depuis le site web.
                                             category: "Formation"
                                         }
                                     ].map((faq, index) => (
-                                        <div
+                                        <motion.div
                                             key={index}
+                                            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                            viewport={{ once: true, margin: "-50px" }}
+                                            transition={{ 
+                                                duration: 0.5, 
+                                                delay: index * 0.1,
+                                                ease: "easeOut"
+                                            }}
+                                            whileHover={{ 
+                                                y: -2,
+                                                transition: { duration: 0.2 }
+                                            }}
                                             className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
                                         >
                                             <button
@@ -630,22 +678,48 @@ Cet email a été généré automatiquement depuis le site web.
                                                 </div>
                                             </button>
 
-                                            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeFAQ === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                                                }`}>
-                                                <div className="px-6 pb-6">
+                                            <motion.div 
+                                                className={`overflow-hidden transition-all duration-500 ease-in-out ${activeFAQ === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                                                initial={false}
+                                                animate={{
+                                                    height: activeFAQ === index ? 'auto' : 0,
+                                                    opacity: activeFAQ === index ? 1 : 0
+                                                }}
+                                                transition={{ 
+                                                    duration: 0.4, 
+                                                    ease: "easeInOut"
+                                                }}
+                                            >
+                                                <motion.div 
+                                                    className="px-6 pb-6"
+                                                    initial={false}
+                                                    animate={{
+                                                        y: activeFAQ === index ? 0 : -10
+                                                    }}
+                                                    transition={{ 
+                                                        duration: 0.3, 
+                                                        delay: activeFAQ === index ? 0.1 : 0
+                                                    }}
+                                                >
                                                     <div className="border-t border-gray-100 pt-4">
                                                         <p className="text-gray-600 leading-relaxed">
                                                             {faq.answer}
                                                         </p>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                </motion.div>
+                                            </motion.div>
+                                        </motion.div>
                                     ))}
                                 </div>
 
                                 {/* Additional Help Section */}
-                                <div className="mt-16 bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                    className="mt-16 bg-white rounded-2xl p-8 border border-gray-100 shadow-sm"
+                                >
                                     <div className="text-center">
                                         <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
                                             <FaCommentAlt className="text-primary text-2xl" />
@@ -674,25 +748,52 @@ Cet email a été généré automatiquement depuis le site web.
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
 
                                 {/* Quick Contact Stats */}
-                                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="text-center">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.5 }}
+                                    className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+                                >
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: 0.6 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        className="text-center"
+                                    >
                                         <div className="text-3xl font-bold text-primary mb-2">&lt; 2h</div>
                                         <div className="text-gray-600">Temps de réponse moyen</div>
-                                    </div>
-                                    <div className="text-center">
+                                    </motion.div>
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: 0.7 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        className="text-center"
+                                    >
                                         <div className="text-3xl font-bold text-secondary mb-2">98%</div>
                                         <div className="text-gray-600">Taux de satisfaction client</div>
-                                    </div>
-                                    <div className="text-center">
+                                    </motion.div>
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: 0.8 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        className="text-center"
+                                    >
                                         <div className="text-3xl font-bold text-accent mb-2">24/7</div>
                                         <div className="text-gray-600">Support technique disponible</div>
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </motion.div>
                             </div>
-                        </section>
+                        </motion.section>
                     </div>
                 </>
             )}

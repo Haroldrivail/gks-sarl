@@ -1,21 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import Loader from '../components/Loader';
 import { NavLink } from 'react-router';
 import { FaStore, FaSeedling, FaTruck, FaHotel, FaCogs, FaHandshake, FaArrowRight, FaCheckCircle, FaUsers, FaTrophy, FaGlobe, FaChartLine } from 'react-icons/fa';
+import usePreloadResources from '../hooks/usePreloadResources';
 
 // Image d'arrière-plan pour la section hero
 import sectorsBgImg from '../assets/images/team-collaboration.jpg';
 
 export default function Sectors() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { progress, isComplete } = usePreloadResources();
+  const [fadeOut, setFadeOut] = useState(false);
+  const [hideLoader, setHideLoader] = useState(false);
 
-  useState(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  useEffect(() => {
+    if (isComplete || progress >= 100) {
+      const t1 = setTimeout(() => setFadeOut(true), 250);
+      const t2 = setTimeout(() => setHideLoader(true), 900);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
+  }, [isComplete, progress]);
 
   const sectors = [
     {
@@ -133,12 +138,20 @@ export default function Sectors() {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {!hideLoader && (
+        <div className={(fadeOut ? 'opacity-0' : 'opacity-100') + ' transition-opacity duration-500'}>
+          <Loader progress={progress} />
+        </div>
+      )}
+      {hideLoader && (
         <div className="min-h-screen bg-gray-50">
           {/* Hero Section */}
-          <section className="relative py-20 bg-gray-900 overflow-hidden">
+          <motion.section 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative py-20 bg-gray-900 overflow-hidden"
+          >
             {/* Background Image with Overlay */}
             <div className="absolute inset-0">
               <img
@@ -176,7 +189,7 @@ export default function Sectors() {
                 </NavLink>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Sectors Grid */}
           <section className="py-20">
@@ -193,8 +206,21 @@ export default function Sectors() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {sectors.map((sector, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.1,
+                      ease: "easeOut"
+                    }}
+                    whileHover={{ 
+                      y: -8, 
+                      scale: 1.02,
+                      transition: { duration: 0.3 }
+                    }}
                     className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group"
                   >
                     {/* Sector Header */}
@@ -249,16 +275,28 @@ export default function Sectors() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
           {/* Achievements Section */}
-          <section className="py-20 bg-white">
+          <motion.section 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="py-20 bg-white"
+          >
             <div className="max-w-7xl mx-auto px-6">
-              <div className="text-center mb-16">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-16"
+              >
                 <h2 className="text-4xl font-bold text-gray-900 mb-6">
                   Nos Réalisations par Secteur
                 </h2>
@@ -266,13 +304,22 @@ export default function Sectors() {
                   Des chiffres qui témoignent de notre expertise et de la confiance
                   que nous accordent nos clients dans tous les secteurs.
                 </p>
-              </div>
+              </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {achievements.map((achievement, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="text-center group hover:scale-105 transition-transform duration-300"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.1,
+                      ease: "easeOut"
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    className="text-center group"
                   >
                     <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                       <achievement.icon className="text-3xl text-primary group-hover:text-white" />
@@ -289,16 +336,28 @@ export default function Sectors() {
                     <p className="text-gray-600">
                       {achievement.description}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Testimonials by Sector */}
-          <section className="py-20 bg-gray-50">
+          <motion.section 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="py-20 bg-gray-50"
+          >
             <div className="max-w-7xl mx-auto px-6">
-              <div className="text-center mb-16">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-16"
+              >
                 <h2 className="text-4xl font-bold text-gray-900 mb-6">
                   Témoignages par Secteur
                 </h2>
@@ -306,40 +365,100 @@ export default function Sectors() {
                   Découvrez ce que nos clients disent de nos interventions
                   dans leurs secteurs d'activité respectifs.
                 </p>
-              </div>
+              </motion.div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {testimonials.map((testimonial, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.2,
+                      ease: "easeOut"
+                    }}
+                    whileHover={{ 
+                      y: -8,
+                      scale: 1.02,
+                      transition: { duration: 0.3 }
+                    }}
                     className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
                   >
-                    <div className="text-center mb-6">
-                      <div className="text-4xl mb-4">
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.4, 
+                        delay: index * 0.2 + 0.3 
+                      }}
+                      className="text-center mb-6"
+                    >
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          duration: 0.5, 
+                          delay: index * 0.2 + 0.4,
+                          type: "spring",
+                          stiffness: 200
+                        }}
+                        className="text-4xl mb-4"
+                      >
                         {testimonial.image}
-                      </div>
-                      <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-primary font-medium text-sm">
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          duration: 0.4, 
+                          delay: index * 0.2 + 0.5 
+                        }}
+                        className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-primary font-medium text-sm"
+                      >
                         {testimonial.sector}
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
 
-                    <p className="text-gray-600 mb-6 italic text-center">
+                    <motion.p 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: index * 0.2 + 0.6 
+                      }}
+                      className="text-gray-600 mb-6 italic text-center"
+                    >
                       "{testimonial.text}"
-                    </p>
+                    </motion.p>
 
-                    <div className="text-center">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.4, 
+                        delay: index * 0.2 + 0.7 
+                      }}
+                      className="text-center"
+                    >
                       <div className="font-semibold text-gray-900 mb-1">
                         {testimonial.author}
                       </div>
                       <div className="text-sm text-gray-600">
                         {testimonial.company}
                       </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* CTA Section */}
           <section className="py-20 bg-gray-900 relative overflow-hidden">

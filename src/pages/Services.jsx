@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSpring, useInView } from '@react-spring/web';
 // eslint-disable-next-line no-unused-vars
-import { useSpring, useInView, animated } from '@react-spring/web';
+import { motion } from 'framer-motion';
 import Loader from '../components/Loader';
 import ServiceIllustration from '../components/ServiceIllustration';
 import { NavLink } from 'react-router';
 import { FaSolarPanel, FaWifi, FaLaptopCode, FaServer, FaShippingFast, FaHammer, FaArrowRight, FaCheckCircle, FaRegLightbulb, FaCog } from 'react-icons/fa';
+import usePreloadResources from '../hooks/usePreloadResources';
 
 // Import des images du dossier assets
 import datacenterTeamImg from '../assets/images/data-center-team.jpg';
@@ -18,7 +20,9 @@ import networkImg from '../assets/images/networking-image.jpg';
 import servicesBgImg from '../assets/images/business-growth.jpg';
 
 export default function Services() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { progress, isComplete } = usePreloadResources();
+  const [fadeOut, setFadeOut] = useState(false);
+  const [hideLoader, setHideLoader] = useState(false);
 
   // Composant pour animer les cartes de services
   const AnimatedServiceCard = ({ service, index }) => {
@@ -103,13 +107,13 @@ export default function Services() {
     );
   };
 
-  useState(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  useEffect(() => {
+    if (isComplete || progress >= 100) {
+      const t1 = setTimeout(() => setFadeOut(true), 250);
+      const t2 = setTimeout(() => setHideLoader(true), 900);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
+  }, [isComplete, progress]);
 
   const services = [
     {
@@ -209,13 +213,21 @@ export default function Services() {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {!hideLoader && (
+        <div className={(fadeOut ? 'opacity-0' : 'opacity-100') + ' transition-opacity duration-500'}>
+          <Loader progress={progress} />
+        </div>
+      )}
+      {hideLoader && (
         <>
           <div className="min-h-screen bg-gray-50">
             {/* Hero Section avec Illustration */}
-            <section className="relative py-20 bg-gray-900 overflow-hidden">
+            <motion.section 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative py-20 bg-gray-900 overflow-hidden"
+            >
               {/* Background Image with Overlay */}
               <div className="absolute inset-0">
                 <img
@@ -290,7 +302,7 @@ export default function Services() {
                   </div>
                 </div>
               </div>
-            </section>
+            </motion.section>
 
             {/* Services Grid */}
             <section className="py-20">
@@ -307,9 +319,22 @@ export default function Services() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {services.map((service, index) => (
-                    <div
+                    <motion.div
                       key={index}
-                      className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2"
+                      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: index * 0.1,
+                        ease: "easeOut"
+                      }}
+                      whileHover={{ 
+                        y: -8, 
+                        scale: 1.02,
+                        transition: { duration: 0.3 }
+                      }}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 group"
                     >
                       {/* Service Header */}
                       <div className={`h-2 bg-gradient-to-r ${service.color}`}></div>
@@ -363,29 +388,50 @@ export default function Services() {
                           ))}
                         </ul>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </section>
 
             {/* Process Section */}
-            <section className="py-20 bg-white">
+            <motion.section 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="py-20 bg-white"
+            >
               <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-16">
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="text-center mb-16"
+                >
                   <h2 className="text-4xl font-bold text-gray-900 mb-6">
                     Notre Processus de Travail
                   </h2>
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                     Une méthodologie éprouvée pour garantir le succès de vos projets
                   </p>
-                </div>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {processSteps.map((step, index) => (
-                    <div
+                    <motion.div
                       key={index}
-                      className="text-center group hover:scale-105 transition-all duration-300"
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: index * 0.2,
+                        ease: "easeOut"
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      className="text-center group"
                     >
                       <div className="relative">
                         {/* Step Number */}
@@ -409,14 +455,20 @@ export default function Services() {
                       <p className="text-gray-600">
                         {step.description}
                       </p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
-            </section>
+            </motion.section>
 
             {/* CTA Section */}
-            <section className="py-20 bg-gray-900 relative overflow-hidden">
+            <motion.section 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="py-20 bg-gray-900 relative overflow-hidden"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-green-500/10"></div>
 
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -438,7 +490,7 @@ export default function Services() {
                   </NavLink>
                 </div>
               </div>
-            </section>
+            </motion.section>
           </div>
         </>
       )}

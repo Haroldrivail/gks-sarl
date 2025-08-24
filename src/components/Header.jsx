@@ -30,10 +30,9 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 bg-white/30 ${scrolled ? 'backdrop-blur-3xl shadow-2xl mt-8 py-2 px-5 mx-auto rounded-full max-w-5xl' : 'backdrop-blur-sm w-full'}`}>
+        <header className={`top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50 bg-white/30 ${scrolled ? 'fixed backdrop-blur-3xl shadow-2xl mt-2 py-2 px-5 mx-auto rounded-full max-w-5xl' : 'backdrop-blur-sm w-full'}`}>
             {/* Barre de contact moderne - visible seulement quand pas scrollé */}
-            <div className={`bg-secondary text-sm transition-all duration-500 ease-in-out overflow-hidden relative ${scrolled ? 'hidden opacity-0' : 'max-h-16 opacity-100'}`}>
-                {/* Effet de brillance animé */}
+            <div className={`bg-secondary text-sm overflow-hidden relative hidden md:block ${scrolled ? ' max-h-0' : 'max-h-16 opacity-100'}`}>
                 <div className="max-w-7xl mx-auto px-6 py-2">
                     <div className="flex justify-evenly gap-10 flex-wrap items-center">
                         <a 
@@ -70,7 +69,7 @@ export default function Header() {
             </div>
 
             {/* Header principal moderne */}
-            <div className={`transition-all py-2 duration-500 ease-in-out bg-transparent ${scrolled ? '' : 'backdrop-blur-sm'}`}>
+            <div className={` py-2 ${scrolled ? ' bg-transparent' : 'bg-white/30'}`}>
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex justify-between items-center">
                         {/* Logo GKS SARL moderne */}

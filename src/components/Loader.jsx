@@ -13,7 +13,7 @@ const LOADING_ICONS = [
   { Icon: FaRocket, color: 'text-green-500', label: 'Lancement...' }
 ];
 
-export default function Loader() {
+export default function Loader({ progress = 0 }) {
   const [currentIcon, setCurrentIcon] = useState(0);
   const [loadingText, setLoadingText] = useState('Chargement...');
 
@@ -31,11 +31,10 @@ export default function Loader() {
     config: { tension: 200, friction: 25 }
   });
 
-  // Animation pour la barre de progression
+  // Animation pour la barre de progression basée sur la valeur réelle
   const progressAnimation = useSpring({
-    from: { width: '0%' },
-    to: { width: '100%' },
-    config: { duration: 4000 }
+    width: `${progress}%`,
+    config: { tension: 170, friction: 26 }
   });
 
   const particlesInit = useCallback(async engine => {
@@ -164,14 +163,14 @@ export default function Loader() {
         {/* Barre de progression moderne */}
         <div className="w-64 mx-auto mb-8">
           <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
-            <animated.div 
+            <animated.div
               style={progressAnimation}
               className="h-full bg-gradient-to-r from-primary via-yellow-500 to-green-500 rounded-full"
-            ></animated.div>
+            />
           </div>
           <div className="flex justify-between text-xs text-gray-500 mt-2">
-            <span>0%</span>
-            <span>100%</span>
+            <span>{Math.min(99, Math.floor(progress))}%</span>
+            <span>{progress >= 100 ? '100%' : '...'}</span>
           </div>
         </div>
 

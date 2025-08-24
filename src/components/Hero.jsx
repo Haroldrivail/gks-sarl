@@ -9,7 +9,6 @@ import ServiceIllustration from './ServiceIllustration';
 
 // Import des images du dossier assets
 import heroTechImg from '../assets/images/hero-tech-img.jpg';
-import teamWorkImg from '../assets/images/team-collaboration.jpg';
 
 export default function Hero() {
     const particlesInit = useCallback(async engine => {
@@ -291,33 +290,7 @@ export default function Hero() {
                                             Web
                                         </div>
                                     </div>
-                                </div>
-
-                                {/* Cards flottantes avec mini illustrations */}
-                                <div className="absolute -top-4 -right-4 w-24 h-24 bg-white rounded-2xl shadow-xl flex items-center justify-center border border-gray-100">
-                                    <div className="text-center">
-                                        <img
-                                            src={teamWorkImg}
-                                            alt="Équipe certifiée"
-                                            className="w-8 h-8 rounded-lg mx-auto mb-1 object-cover"
-                                        />
-                                        <div className="text-xs font-semibold text-gray-700">Certifié</div>
-                                    </div>
-                                </div>
-
-                                <div className="absolute -bottom-4 -left-4 w-32 h-16 bg-white rounded-2xl shadow-xl flex items-center px-4 border border-gray-100">
-                                    <ServiceIllustration
-                                        type="avatar2"
-                                        className="w-8 h-8 rounded-lg mr-3"
-                                        fallbackIcon={<div className="w-8 h-8 bg-green-500/20 rounded-lg mr-3 flex items-center justify-center">
-                                            <FaStar className="text-green-500 text-sm" />
-                                        </div>}
-                                    />
-                                    <div>
-                                        <div className="text-sm font-bold text-gray-900">4.9/5</div>
-                                        <div className="text-xs text-gray-500">Avis clients</div>
-                                    </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
 
